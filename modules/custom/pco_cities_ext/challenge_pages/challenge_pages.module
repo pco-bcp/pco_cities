@@ -33,15 +33,17 @@ function challenge_pages_theme() {
 function challenge_pages_node_presave(NodeInterface $node) {
   if ($node->getType() == 'challenge') {
 
+    $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
     // Check for conflict on friendly url name. Must be unique.
     $friendly_url = clean_url($node->get('field_friendly_url')->getValue()[0]['value']);
     $original_friendly_url = '';
 
-    if($node->original->getTranslation('en')->get('field_friendly_url')->getValue()) {
+    if($node->original) {
       $original_friendly_url = clean_url($node->original->getTranslation('en')->get('field_friendly_url')->getValue()[0]['value']);
     }
 
-    if (get_friendly_url_name($friendly_url) and $friendly_url != $original_friendly_url) {
+    if (get_friendly_url_name($friendly_url) and $friendly_url != $node->original->getTranslation($language)->get('field_friendly_url')->getValue()[0]['value']) {
       $response = new RedirectResponse(\Drupal::request()->getRequestUri());
       $response->send();
       drupal_set_message(t('Friendly URL must be unique. There is already a challenge with that friendly URL'), 'error', TRUE);
@@ -49,15 +51,18 @@ function challenge_pages_node_presave(NodeInterface $node) {
     }
 
     $node->set('field_friendly_url', $friendly_url);
-
     $friendly_url_english = clean_url($node->getTranslation('en')->get('field_friendly_url')->getValue()[0]['value']);
+
     // Check to see if translation exists first.
-    if ($node->getTranslation('fr')->get('field_friendly_url')->getValue()) {
-      $friendly_url_french = clean_url($node->getTranslation('fr')->get('field_friendly_url')->getValue()[0]['value']);
+    if (array_key_exists('fr', $node->getTranslationLanguages())) {
+      if ($node->getTranslation('fr')->get('field_friendly_url')->getValue()) {
+        $friendly_url_french = clean_url($node->getTranslation('fr')->get('field_friendly_url')->getValue()[0]['value']);
+      }
     }
 
+
     // Delete original paths - this may or may not do anything.
-    if($node->original->getTranslation('en')->get('field_friendly_url')->getValue()) {
+    if($node->original) {
       db_delete('url_alias')->condition('source', '/challenges/' . $original_friendly_url)->execute();
       db_delete('url_alias')->condition('source', '/challenges/' . $original_friendly_url . '/news')->execute();
       if ($node->getTranslation('en')->get('field_challeng_subpage_url_1')->getValue()) {
@@ -83,109 +88,124 @@ function challenge_pages_node_presave(NodeInterface $node) {
     db_delete('url_alias')->condition('source', '/challenges/' . $friendly_url . '/news')->execute();
 
     // Check if french alias already exists, if not then create.
-    if ($node->getTranslation('fr')->get('field_friendly_url')->getValue()) {
-      if (!empty(get_url_alias('/defis/' . $node->getTranslation('fr')->get('field_friendly_url')->getValue()[0]['value']))) {
-        db_insert('url_alias')->fields([
-          'source' => '/challenges/' . $friendly_url_english,
-          'alias' => '/defis/' . $friendly_url_french,
-          'langcode' => 'fr',
-        ])->execute();
-      }
-    };
+    if(array_key_exists('fr', $node->getTranslationLanguages())) {
+      if ($node->getTranslation('fr')->get('field_friendly_url')->getValue()) {
+        if (!empty(get_url_alias('/defis/' . $node->getTranslation('fr')->get('field_friendly_url')->getValue()[0]['value']))) {
+          db_insert('url_alias')->fields([
+            'source' => '/challenges/' . $friendly_url_english,
+            'alias' => '/defis/' . $friendly_url_french,
+            'langcode' => 'fr',
+          ])->execute();
+        }
+      };
+    }
 
-    if ($node->getTranslation('fr')->get('field_friendly_url')->getValue()) {
-      if (!empty(get_url_alias('/defis/' . $node->getTranslation('fr')->get('field_friendly_url')->getValue()[0]['value']) . '/nouvelles')) {
-        db_insert('url_alias')->fields([
-          'source' => '/challenges/' . $friendly_url_english . '/news',
-          'alias' => '/defis/' . $friendly_url_french . '/nouvelles',
-          'langcode' => 'fr',
-        ])->execute();
-      }
-    };
+    if(array_key_exists('fr', $node->getTranslationLanguages())) {
+      if ($node->getTranslation('fr')->get('field_friendly_url')->getValue()) {
+        if (!empty(get_url_alias('/defis/' . $node->getTranslation('fr')->get('field_friendly_url')->getValue()[0]['value']) . '/nouvelles')) {
+          db_insert('url_alias')->fields([
+            'source' => '/challenges/' . $friendly_url_english . '/news',
+            'alias' => '/defis/' . $friendly_url_french . '/nouvelles',
+            'langcode' => 'fr',
+          ])->execute();
+        }
+      };
+    }
 
     // Do the same for subpages.
-    if (!empty(($node->get('field_challeng_subpage_url_1')->getValue()[0]['value'])) && ($node->get('field_challenge_subpage_enable_1')->getValue()[0]['value'])) {
-      $friendly_subpage_url = clean_url($node->get('field_challeng_subpage_url_1')->getValue()[0]['value']);
-      $node->set('field_challeng_subpage_url_1', $friendly_subpage_url);
+    if(array_key_exists('fr', $node->getTranslationLanguages())) {
+      if (!empty(($node->get('field_challeng_subpage_url_1')->getValue()[0]['value'])) && ($node->get('field_challenge_subpage_enable_1')->getValue()[0]['value'])) {
+        $friendly_subpage_url = clean_url($node->get('field_challeng_subpage_url_1')->getValue()[0]['value']);
+        $node->set('field_challeng_subpage_url_1', $friendly_subpage_url);
 
-      db_delete('url_alias')->condition('source', '/challenges/' . $friendly_url . '/' . $friendly_subpage_url)->execute();
+        db_delete('url_alias')->condition('source', '/challenges/' . $friendly_url . '/' . $friendly_subpage_url)->execute();
 
-      if ($node->getTranslation('fr')->get('field_friendly_url')->getValue() && $node->getTranslation('fr')->get('field_challeng_subpage_url_1')->getValue()) {
-        if (!empty(get_url_alias('/defis/' . $node->getTranslation('fr')->get('field_friendly_url')->getValue()[0]['value']) . '/' . $node->getTranslation('fr')->get('field_challeng_subpage_url_1')->getValue()[0]['value'])) {
-          db_insert('url_alias')->fields([
-            'source' => '/challenges/' . $friendly_url_english . '/' . $node->getTranslation('en')->get('field_challeng_subpage_url_1')->getValue()[0]['value'],
-            'alias' => '/defis/' . $friendly_url_french . '/' . $node->getTranslation('fr')->get('field_challeng_subpage_url_1')->getValue()[0]['value'],
-            'langcode' => 'fr',
-          ])->execute();
-        }
-      };
+        if ($node->getTranslation('fr')->get('field_friendly_url')->getValue() && $node->getTranslation('fr')->get('field_challeng_subpage_url_1')->getValue()) {
+          if (!empty(get_url_alias('/defis/' . $node->getTranslation('fr')->get('field_friendly_url')->getValue()[0]['value']) . '/' . $node->getTranslation('fr')->get('field_challeng_subpage_url_1')->getValue()[0]['value'])) {
+            db_insert('url_alias')->fields([
+              'source' => '/challenges/' . $friendly_url_english . '/' . $node->getTranslation('en')->get('field_challeng_subpage_url_1')->getValue()[0]['value'],
+              'alias' => '/defis/' . $friendly_url_french . '/' . $node->getTranslation('fr')->get('field_challeng_subpage_url_1')->getValue()[0]['value'],
+              'langcode' => 'fr',
+            ])->execute();
+          }
+        };
+      }
     }
-    if (!empty(($node->get('field_challeng_subpage_url_2')->getValue()[0]['value'])) && ($node->get('field_challenge_subpage_enable_2')->getValue()[0]['value'])) {
-      $friendly_subpage_url = clean_url($node->get('field_challeng_subpage_url_2')->getValue()[0]['value']);
-      $node->set('field_challeng_subpage_url_2', $friendly_subpage_url);
 
-      db_delete('url_alias')->condition('source', '/challenges/' . $friendly_url . '/' . $friendly_subpage_url)->execute();
+    if(array_key_exists('fr', $node->getTranslationLanguages())) {
+      if (!empty(($node->get('field_challeng_subpage_url_2')->getValue()[0]['value'])) && ($node->get('field_challenge_subpage_enable_2')->getValue()[0]['value'])) {
+        $friendly_subpage_url = clean_url($node->get('field_challeng_subpage_url_2')->getValue()[0]['value']);
+        $node->set('field_challeng_subpage_url_2', $friendly_subpage_url);
 
-      if ($node->getTranslation('fr')->get('field_friendly_url')->getValue() && $node->getTranslation('fr')->get('field_challeng_subpage_url_2')->getValue()) {
-        if (!empty(get_url_alias('/defis/' . $node->getTranslation('fr')->get('field_friendly_url')->getValue()[0]['value']) . '/' . $node->getTranslation('fr')->get('field_challeng_subpage_url_2')->getValue()[0]['value'])) {
-          db_insert('url_alias')->fields([
-            'source' => '/challenges/' . $friendly_url_english . '/' . $node->getTranslation('en')->get('field_challeng_subpage_url_2')->getValue()[0]['value'],
-            'alias' => '/defis/' . $friendly_url_french . '/' . $node->getTranslation('fr')->get('field_challeng_subpage_url_2')->getValue()[0]['value'],
-            'langcode' => 'fr',
-          ])->execute();
-        }
-      };
+        db_delete('url_alias')->condition('source', '/challenges/' . $friendly_url . '/' . $friendly_subpage_url)->execute();
+
+        if ($node->getTranslation('fr')->get('field_friendly_url')->getValue() && $node->getTranslation('fr')->get('field_challeng_subpage_url_2')->getValue()) {
+          if (!empty(get_url_alias('/defis/' . $node->getTranslation('fr')->get('field_friendly_url')->getValue()[0]['value']) . '/' . $node->getTranslation('fr')->get('field_challeng_subpage_url_2')->getValue()[0]['value'])) {
+            db_insert('url_alias')->fields([
+              'source' => '/challenges/' . $friendly_url_english . '/' . $node->getTranslation('en')->get('field_challeng_subpage_url_2')->getValue()[0]['value'],
+              'alias' => '/defis/' . $friendly_url_french . '/' . $node->getTranslation('fr')->get('field_challeng_subpage_url_2')->getValue()[0]['value'],
+              'langcode' => 'fr',
+            ])->execute();
+          }
+        };
+      }
     }
-    if (!empty(($node->get('field_challeng_subpage_url_3')->getValue()[0]['value'])) && ($node->get('field_challenge_subpage_enable_3')->getValue()[0]['value'])) {
-      $friendly_subpage_url = clean_url($node->get('field_challeng_subpage_url_3')->getValue()[0]['value']);
-      $node->set('field_challeng_subpage_url_3', $friendly_subpage_url);
 
-      db_delete('url_alias')->condition('source', '/challenges/' . $friendly_url . '/' . $friendly_subpage_url)->execute();
+    if(array_key_exists('fr', $node->getTranslationLanguages())) {
+      if (!empty(($node->get('field_challeng_subpage_url_3')->getValue()[0]['value'])) && ($node->get('field_challenge_subpage_enable_3')->getValue()[0]['value'])) {
+        $friendly_subpage_url = clean_url($node->get('field_challeng_subpage_url_3')->getValue()[0]['value']);
+        $node->set('field_challeng_subpage_url_3', $friendly_subpage_url);
 
-      if ($node->getTranslation('fr')->get('field_friendly_url')->getValue() && $node->getTranslation('fr')->get('field_challeng_subpage_url_3')->getValue()) {
-        if (!empty(get_url_alias('/defis/' . $node->getTranslation('fr')->get('field_friendly_url')->getValue()[0]['value']) . '/' . $node->getTranslation('fr')->get('field_challeng_subpage_url_3')->getValue()[0]['value'])) {
-          db_insert('url_alias')->fields([
-            'source' => '/challenges/' . $friendly_url_english . '/' . $node->getTranslation('en')->get('field_challeng_subpage_url_3')->getValue()[0]['value'],
-            'alias' => '/defis/' . $friendly_url_french . '/' . $node->getTranslation('fr')->get('field_challeng_subpage_url_3')->getValue()[0]['value'],
-            'langcode' => 'fr',
-          ])->execute();
-        }
-      };
+        db_delete('url_alias')->condition('source', '/challenges/' . $friendly_url . '/' . $friendly_subpage_url)->execute();
+
+        if ($node->getTranslation('fr')->get('field_friendly_url')->getValue() && $node->getTranslation('fr')->get('field_challeng_subpage_url_3')->getValue()) {
+          if (!empty(get_url_alias('/defis/' . $node->getTranslation('fr')->get('field_friendly_url')->getValue()[0]['value']) . '/' . $node->getTranslation('fr')->get('field_challeng_subpage_url_3')->getValue()[0]['value'])) {
+            db_insert('url_alias')->fields([
+              'source' => '/challenges/' . $friendly_url_english . '/' . $node->getTranslation('en')->get('field_challeng_subpage_url_3')->getValue()[0]['value'],
+              'alias' => '/defis/' . $friendly_url_french . '/' . $node->getTranslation('fr')->get('field_challeng_subpage_url_3')->getValue()[0]['value'],
+              'langcode' => 'fr',
+            ])->execute();
+          }
+        };
+      }
     }
-    if (!empty(($node->get('field_challeng_subpage_url_4')->getValue()[0]['value'])) && ($node->get('field_challenge_subpage_enable_4')->getValue()[0]['value'])) {
-      $friendly_subpage_url = clean_url($node->get('field_challeng_subpage_url_4')->getValue()[0]['value']);
-      $node->set('field_challeng_subpage_url_4', $friendly_subpage_url);
 
-      db_delete('url_alias')->condition('source', '/challenges/' . $friendly_url . '/' . $friendly_subpage_url)->execute();
+    if(array_key_exists('fr', $node->getTranslationLanguages())) {
+      if (!empty(($node->get('field_challeng_subpage_url_4')->getValue()[0]['value'])) && ($node->get('field_challenge_subpage_enable_4')->getValue()[0]['value'])) {
+        $friendly_subpage_url = clean_url($node->get('field_challeng_subpage_url_4')->getValue()[0]['value']);
+        $node->set('field_challeng_subpage_url_4', $friendly_subpage_url);
 
-      if ($node->getTranslation('fr')->get('field_friendly_url')->getValue() && $node->getTranslation('fr')->get('field_challeng_subpage_url_4')->getValue()) {
-        if (!empty(get_url_alias('/defis/' . $node->getTranslation('fr')->get('field_friendly_url')->getValue()[0]['value']) . '/' . $node->getTranslation('fr')->get('field_challeng_subpage_url_4')->getValue()[0]['value'])) {
-          db_insert('url_alias')->fields([
-            'source' => '/challenges/' . $friendly_url_english . '/' . $node->getTranslation('en')->get('field_challeng_subpage_url_4')->getValue()[0]['value'],
-            'alias' => '/defis/' . $friendly_url_french . '/' . $node->getTranslation('fr')->get('field_challeng_subpage_url_4')->getValue()[0]['value'],
-            'langcode' => 'fr',
-          ])->execute();
-        }
-      };
+        db_delete('url_alias')->condition('source', '/challenges/' . $friendly_url . '/' . $friendly_subpage_url)->execute();
+
+        if ($node->getTranslation('fr')->get('field_friendly_url')->getValue() && $node->getTranslation('fr')->get('field_challeng_subpage_url_4')->getValue()) {
+          if (!empty(get_url_alias('/defis/' . $node->getTranslation('fr')->get('field_friendly_url')->getValue()[0]['value']) . '/' . $node->getTranslation('fr')->get('field_challeng_subpage_url_4')->getValue()[0]['value'])) {
+            db_insert('url_alias')->fields([
+              'source' => '/challenges/' . $friendly_url_english . '/' . $node->getTranslation('en')->get('field_challeng_subpage_url_4')->getValue()[0]['value'],
+              'alias' => '/defis/' . $friendly_url_french . '/' . $node->getTranslation('fr')->get('field_challeng_subpage_url_4')->getValue()[0]['value'],
+              'langcode' => 'fr',
+            ])->execute();
+          }
+        };
+      }
     }
-    if (!empty(($node->get('field_challeng_subpage_url_5')->getValue()[0]['value'])) && ($node->get('field_challenge_subpage_enable_5')->getValue()[0]['value'])) {
-      $friendly_subpage_url = clean_url($node->get('field_challeng_subpage_url_5')->getValue()[0]['value']);
-      $node->set('field_challeng_subpage_url_5', $friendly_subpage_url);
 
-      db_delete('url_alias')->condition('source', '/challenges/' . $friendly_url . '/' . $friendly_subpage_url)->execute();
+    if(array_key_exists('fr', $node->getTranslationLanguages())) {
+      if (!empty(($node->get('field_challeng_subpage_url_5')->getValue()[0]['value'])) && ($node->get('field_challenge_subpage_enable_5')->getValue()[0]['value'])) {
+        $friendly_subpage_url = clean_url($node->get('field_challeng_subpage_url_5')->getValue()[0]['value']);
+        $node->set('field_challeng_subpage_url_5', $friendly_subpage_url);
 
-      if ($node->getTranslation('fr')->get('field_friendly_url')->getValue() && $node->getTranslation('fr')->get('field_challeng_subpage_url_5')->getValue()) {
-        if (!empty(get_url_alias('/defis/' . $node->getTranslation('fr')->get('field_friendly_url')->getValue()[0]['value']) . '/' . $node->getTranslation('fr')->get('field_challeng_subpage_url_5')->getValue()[0]['value'])) {
-          db_insert('url_alias')->fields([
-            'source' => '/challenges/' . $friendly_url_english . '/' . $node->getTranslation('en')->get('field_challeng_subpage_url_5')->getValue()[0]['value'],
-            'alias' => '/defis/' . $friendly_url_french . '/' . $node->getTranslation('fr')->get('field_challeng_subpage_url_5')->getValue()[0]['value'],
-            'langcode' => 'fr',
-          ])->execute();
-        }
-      };
-    }
-    else {
-      // Do nothing.
+        db_delete('url_alias')->condition('source', '/challenges/' . $friendly_url . '/' . $friendly_subpage_url)->execute();
+
+        if ($node->getTranslation('fr')->get('field_friendly_url')->getValue() && $node->getTranslation('fr')->get('field_challeng_subpage_url_5')->getValue()) {
+          if (!empty(get_url_alias('/defis/' . $node->getTranslation('fr')->get('field_friendly_url')->getValue()[0]['value']) . '/' . $node->getTranslation('fr')->get('field_challeng_subpage_url_5')->getValue()[0]['value'])) {
+            db_insert('url_alias')->fields([
+              'source' => '/challenges/' . $friendly_url_english . '/' . $node->getTranslation('en')->get('field_challeng_subpage_url_5')->getValue()[0]['value'],
+              'alias' => '/defis/' . $friendly_url_french . '/' . $node->getTranslation('fr')->get('field_challeng_subpage_url_5')->getValue()[0]['value'],
+              'langcode' => 'fr',
+            ])->execute();
+          }
+        };
+      }
     }
   }
 }
