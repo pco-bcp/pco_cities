@@ -107,6 +107,7 @@ class SubmissionFormModuleController extends ControllerBase {
     $submission_error = $request->get('error');
 
     $language = $this->langManager->getCurrentLanguage()->getId();
+    $defaultLang = $this->langManager->getDefaultLanguage()->getId();
     $nids = $this->query->get('node')->condition('type', 'challenge')->execute();
     $node_storage = $this->entityTypeManager->getStorage('node');
     $nodes = $node_storage->loadMultiple($nids);
@@ -117,8 +118,10 @@ class SubmissionFormModuleController extends ControllerBase {
         $url = $item->get('field_friendly_url')->getValue()[0]['value'];
 
         // Check for french translation.
-        if ($item->getTranslation($language)->get('field_friendly_url')->getValue()) {
-          $url_french = $item->getTranslation($language)->get('field_friendly_url')->getValue()[0]['value'];
+        if (array_key_exists($language, $item->getTranslationLanguages())) {
+          if ($item->getTranslation($language)->get('field_friendly_url')->getValue()) {
+            $url_french = $item->getTranslation($language)->get('field_friendly_url')->getValue()[0]['value'];
+          }
         }
 
         if ($url == $challenge) {
@@ -136,6 +139,13 @@ class SubmissionFormModuleController extends ControllerBase {
     // If no matching node, then we throw an exception.
     if (!$node) {
       throw new NotFoundHttpException();
+    }
+
+    if (!array_key_exists($language, $node->getTranslationLanguages())) {
+      $node = $node->getTranslation($defaultLang);
+    }
+    else {
+      $node = $node->getTranslation($language);
     }
 
     $form = $this->formBuilder()->getForm('Drupal\challenge_submission\Form\SubmissionForm');
@@ -219,7 +229,7 @@ class SubmissionFormModuleController extends ControllerBase {
 
   public function submissionFormPageFrench($challenge, Request $request) {
     $submission_error = $request->get('error');
-
+    die;
     $language = $this->langManager->getCurrentLanguage()->getId();
     $defaultLang = $this->langManager->getDefaultLanguage()->getId();
     $nids = $this->query->get('node')->condition('type', 'challenge')->execute();

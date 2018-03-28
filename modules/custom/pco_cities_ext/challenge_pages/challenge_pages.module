@@ -86,6 +86,7 @@ function challenge_pages_node_presave(NodeInterface $node) {
     // Delete any conflicting paths. Add new paths.
     db_delete('url_alias')->condition('source', '/challenges/' . $friendly_url)->execute();
     db_delete('url_alias')->condition('source', '/challenges/' . $friendly_url . '/news')->execute();
+    db_delete('url_alias')->condition('source', '/challenges/' . $friendly_url . '/submission')->execute();
 
     // Check if french alias already exists, if not then create.
     if(array_key_exists('fr', $node->getTranslationLanguages())) {
@@ -106,6 +107,18 @@ function challenge_pages_node_presave(NodeInterface $node) {
           db_insert('url_alias')->fields([
             'source' => '/challenges/' . $friendly_url_english . '/news',
             'alias' => '/defis/' . $friendly_url_french . '/nouvelles',
+            'langcode' => 'fr',
+          ])->execute();
+        }
+      };
+    }
+
+    if(array_key_exists('fr', $node->getTranslationLanguages())) {
+      if ($node->getTranslation('fr')->get('field_friendly_url')->getValue()) {
+        if (!empty(get_url_alias('/defis/' . $node->getTranslation('fr')->get('field_friendly_url')->getValue()[0]['value']) . '/soumission')) {
+          db_insert('url_alias')->fields([
+            'source' => '/challenges/' . $friendly_url_english . '/submission',
+            'alias' => '/defis/' . $friendly_url_french . '/soumission',
             'langcode' => 'fr',
           ])->execute();
         }
