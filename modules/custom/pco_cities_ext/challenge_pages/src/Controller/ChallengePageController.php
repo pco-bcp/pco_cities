@@ -137,7 +137,9 @@ class ChallengePageController extends ControllerBase {
     // Page Variables.
     $page['#challenge_name'] = $node->title->value;
     $page['#challenge_department'] = $node->get('field_challenge_department')->getValue()[0]['value'];
-    $page['#challenge_image'] = file_create_url($node->field_challenge_image->entity->uri->value) ?? "";
+    if($node->get('field_challenge_image')->getValue()) {
+      $page['#challenge_image'] = file_create_url($node->field_challenge_image->entity->uri->value);
+    }
     $page['#challenge_home'] = '/challenges/' . $challenge;
     $page['#challenge_root'] = '/challenges/' . $challenge;
     $page['#challenge_node'] = '/node/' . $node->id();
@@ -212,7 +214,9 @@ class ChallengePageController extends ControllerBase {
     // Page Variables.
     $page['#challenge_name'] = $node->title->value;
     $page['#challenge_department'] = $node->get('field_challenge_department')->getValue()[0]['value'];
-    $page['#challenge_image'] = file_create_url($node->field_challenge_image->entity->uri->value) ?? "";
+    if($node->get('field_challenge_image')->getValue()) {
+      $page['#challenge_image'] = file_create_url($node->field_challenge_image->entity->uri->value);
+    }
     $page['#challenge_home'] = '/challenges/' . $challenge;
     $page['#challenge_root'] = '/challenges/' . $challenge;
     $page['#challenge_node'] = '/node/' . $node->id();
@@ -333,7 +337,9 @@ class ChallengePageController extends ControllerBase {
     // Page Variables.
     $page['#challenge_name'] = $node->title->value;
     $page['#challenge_department'] = $node->get('field_challenge_department')->getValue()[0]['value'];
-    $page['#challenge_image'] = file_create_url($node->field_challenge_image->entity->uri->value);
+    if($node->get('field_challenge_image')->getValue()) {
+      $page['#challenge_image'] = file_create_url($node->field_challenge_image->entity->uri->value);
+    }
     $page['#challenge_home'] = '/challenges/' . $challenge;
     $page['#challenge_root'] = '/challenges/' . $challenge;
     $page['#challenge_node'] = '/node/' . $node->id();
