@@ -30,7 +30,7 @@ class MailgunConfigForm extends ConfigFormBase {
 
     $form['from_email'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Mailgun Domain'),
+      '#title' => $this->t('From Email'),
       '#default_value' => $config->get('challenge_submission.from_email'),
     ];
 
