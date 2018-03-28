@@ -28,6 +28,12 @@ class MailgunConfigForm extends ConfigFormBase {
       '#default_value' => $config->get('challenge_submission.mailgun_domain'),
     ];
 
+    $form['from_email'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Mailgun Domain'),
+      '#default_value' => $config->get('challenge_submission.from_email'),
+    ];
+
     return $form;
   }
 
@@ -37,6 +43,7 @@ class MailgunConfigForm extends ConfigFormBase {
 
     $config->set('challenge_submission.mailgun_key', $form_state->getValue('mailgun_key'));
     $config->set('challenge_submission.mailgun_domain', $form_state->getValue('mailgun_domain'));
+    $config->set('challenge_submission.from_email', $form_state->getValue('from_email'));
 
     $config->save();
 

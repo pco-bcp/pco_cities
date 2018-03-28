@@ -282,8 +282,7 @@ class SubmissionForm extends FormBase {
     $domain = $config->get('challenge_submission.mailgun_domain');
 
     $send_data = [
-      'from'    => 'contact@mailgun.cds-snc.ca',
-    // Email specified from within the CMS.
+      'from'    => $config->get('challenge_submission.from_email'),
       'to'      => $node->get('field_challenge_submission_email')->getValue()[0]['value'],
       'subject' => 'Challenge Submission - ' . $variables['challenge'],
       'html'    => $template,
