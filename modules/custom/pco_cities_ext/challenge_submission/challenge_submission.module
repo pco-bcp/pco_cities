@@ -14,5 +14,9 @@ function challenge_submission_theme() {
       'render element' => 'form',
       'template' => 'submission-form-theme-page',
     ],
+    'challenge_submission_french_page_theme' => [
+      'render element' => 'form',
+      'template' => 'submission-form-french-theme-page',
+    ],
   ];
 }

@@ -1,0 +1,164 @@
+<section>
+  <h1>French</h1>
+  <!-- Add you custom twig html here -->
+  <div data-block-plugin-id="entity_field:node:field_challenge_image" class="submission-form-block block block-ctools-block block-entity-fieldnodefield-challenge-image clearfix challenge--title-block"
+    style="background-image: url({{ form['#challenge_image'] }})">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <section data-block-plugin-id="entity_field:node:title" class="block block-ctools-block block-entity-fieldnodetitle clearfix">
+            <div id="subsite-title">
+              <a href="https://challenge-dev.test/en/challenges/smart-cities">{{ form['#challenge_name'] }}</a>
+            </div>
+          </section>
+          <div class="department">{{ form['#challenge_department'] }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{ challenge.node.menu }}
+  <div class="container-fluid">
+    <div class="container mrgn-tp-lg">
+      <div class="col-md-8">
+
+        {% if form['#submission_success'] == false %} {% if form['#submission_error'] != false %}
+        <section class="alert alert-danger alert-danger-list">
+          <h5>Unexpected error occured
+          </h5>
+          Mail could not be sent. Please ensure all fields are correct and try again.
+        </section>
+        {% endif %}
+
+        <section class="alert alert-warning">
+          <h5>Have you read the
+            <a href="#">submission guidelines?</a>
+          </h5>
+          Challenges have specific requirements around content, presentation, and formatting. If your application does not meet these
+          guidelines it will automatically be disqualified.
+        </section>
+
+        <section class="alert alert-danger alert-danger-list">
+          <h5>
+            Your application has the following errors:
+          </h5>
+          <ul class="error-list">
+          </ul>
+        </section>
+
+        <h2>Submit Your Application</h2>
+        <!-- Start Form -->
+        <form {{form.attributes}}>
+          {{ form.friendly_url }}
+          <div class="field-group mgrn-tp-lg">
+            <h3>Point of Contact</h3>
+            <p>The primary person we should contact. This information will not be made public.
+              <p>
+                <strong>Full Name</strong>
+              </p>
+              {{ form.primary_contact_name }}
+              <p>
+                <strong>Email Address</strong>
+              </p>
+              {{ form.primary_contact_email }}
+          </div>
+
+          <div class="form-group mrgn-tp-xl">
+            <h3>Proposal</h3>
+            <p>
+              <strong>Title</strong>
+            </p>
+            {{ form.title }}
+          </div>
+          <div class="field-group mrgn-tp-lg">
+            <p>
+              <strong>Summary</strong>
+            </p>
+            <p>Provide a short description (150 words) of your project.</p>
+            {{ form.summary }}
+          </div>
+
+          <div class="field-group mrgn-tp-xl">
+            <h3>Proposal Files</h3>
+            <p class="mrgn-tp-md">
+              <strong>Upload your proposal</strong>
+              <p class="small">Requirements: .DOCX or .PDF, and a maximum of 25 MB per file.</p>
+            </p>
+
+            {{ form.proposal }}
+            <p class="mrgn-tp-xl">
+              <strong class="mrgn-tp-lg">Upload a project image</strong>
+              <p class="small">Requirements: .PNG, .JPG, or .JPEG, no text, and a minimum of 1920x1080 pixels.</p>
+            </p>
+            {{ form.proposal_image }}
+            <p class="mrgn-tp-lg">
+              <strong>Link to the video (optional)</strong>
+              <br/>
+            </p>
+            {{ form.link }}
+          </div>
+
+          <div class="field-group mrgn-tp-xl">
+            <h3>Submission Guidelines</h3>
+            {{ form.guidelines_agreement }}
+          </div>
+          <div class="field-group mrgn-tp-xl">
+            <h3>Terms & Conditions</h3>
+            {{ form.terms_agreement }}
+          </div>
+
+          {{ form.actions.submit }} {{ form.form_build_id }} {{ form.form_token }} {{ form.form_id }}
+        </form>
+      </div>
+      {% endif %} {% if form['#submission_success'] == true %}
+      <section class="alert alert-success alert-success-list">
+        <h4>Your application has been received.
+        </h4>
+        An email confirmation has been sent to
+        <strong>{{ form['#submission_email'] }}</strong>.
+      </section>
+
+      <div class="mrgn-tp-lg">
+        <h4>What happens next?</h4>
+        <p class="mrgn-tp-md">Your application will be reviewed and the challenge owners will be in touch.</p>
+        <a class="mrgn-tp-lg form-link" href="#">Stay up to date on this challenge</a>
+      </div>
+
+
+      <div class="brdr-bttm mrgn-tp-lg"></div>
+      <h3>Give Feedback</h3>
+      <section id="google-form-submit" class="hidden mrgn-tp-lg">
+        <p>Thank you for taking the time to give us feedback! We are listening and constantly improving.</p>
+      </section>
+
+
+
+      <section id="google-feedback-form">
+        <p>Overall, how was your experience with the service you received today?</p>
+        <form class="google-form" action="https://docs.google.com/forms/u/1/d/e/1FAIpQLSdyw3SGXUjZytBHMkMNbzD9dP1mJm41hK5YkAu9nzmuP2GUEQ/formResponse?embedded=true"
+          target="_self" method="POST" id="mG61Hd">
+          <input type="hidden" name="entry.208662303" value="{{ form['#challenge_name'] }}"/>
+          <div class="field-group mrgn-tp-md">
+            <input type="radio" name="entry.626865550" value="Great" required> Great
+            <br/>
+            <input type="radio" name="entry.626865550" value="Good" required> Good
+            <br/>
+            <input type="radio" name="entry.626865550" value="Okay" required> Okay
+            <br/>
+            <input type="radio" name="entry.626865550" value="Bad" required> Bad
+            <br/>
+            <input type="radio" name="entry.626865550" value="Terrible" required> Terrible
+            <br/>
+          </div>
+          <div class="field-group mrgn-tp-lg">
+            <p>What would give you more confidence in this service?</p>
+            <textarea class="full-width" rows="5" name="entry.1641344474" required></textarea>
+          </div>
+          <p class="small">Please don't include any personal or financial information like your social insurance number or passport ID.</p>
+          <button class="mrgn-tp-lg btn-submit-feedback button js-form-submit form-submit btn-primary btn" type="submit" value="Submit">Submit</button>
+        </form>
+      </section>
+
+      {% endif %}
+    </div>
+  </div>
+</section>

@@ -301,16 +301,31 @@ class SubmissionForm extends FormBase {
 
       if ($challenge_submission_email->http_response_code === 200) {
         // Redirect to success page. Which should be another module, eventually.
-        $form_state->setRedirect('challenge_submission.submission_success_page', ['challenge' => $challenge_slug, 'email' => $variables['primary_contact_email']]);
+        if($language == 'fr') {
+          $form_state->setRedirect('challenge_submission.submission_success_page_french', ['challenge' => $challenge_slug, 'email' => $variables['primary_contact_email']]);
+        }
+        else {
+          $form_state->setRedirect('challenge_submission.submission_success_page', ['challenge' => $challenge_slug, 'email' => $variables['primary_contact_email']]);
+        }
       }
       else {
         // Return user to module submission page, display error.
-        $form_state->setRedirect('challenge_submission.submission_form_page', ['challenge' => $challenge_slug, 'error' => TRUE]);
+        if($language == 'fr') {
+          $form_state->setRedirect('challenge_submission.submission_form_page_french', ['challenge' => $challenge_slug, 'error' => TRUE]);
+        }
+        else {
+          $form_state->setRedirect('challenge_submission.submission_form_page', ['challenge' => $challenge_slug, 'error' => TRUE]);
+        }
       }
     }
     else {
       // Return user to module submission page, display error.
-      $form_state->setRedirect('challenge_submission.submission_form_page', ['challenge' => $challenge_slug, 'error' => TRUE]);
+      if($language == 'fr') {
+        $form_state->setRedirect('challenge_submission.submission_form_page_french', ['challenge' => $challenge_slug, 'error' => TRUE]);
+      }
+      else {
+        $form_state->setRedirect('challenge_submission.submission_form_page', ['challenge' => $challenge_slug, 'error' => TRUE]);
+      }
     }
   }
 

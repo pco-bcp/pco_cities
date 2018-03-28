@@ -14,6 +14,22 @@ challenge_submission.submission_form_page:
   requirements:
     _permission: 'access content'
 
+challenge_submission.submission_success_page_french:
+  path: '/defis/{challenge}/soumission/succes'
+  defaults:
+    _controller: 'Drupal\challenge_submission\Controller\SubmissionFormModuleController::submissionSuccessPageFrench'
+    _title: 'Submission Success'
+  requirements:
+    _permission: 'access content'
+
+challenge_submission.submission_form_page_french:
+  path: '/defis/{challenge}/soumission'
+  defaults:
+    _controller: 'Drupal\challenge_submission\Controller\SubmissionFormModuleController::submissionFormPageFrench'
+    _title: 'Challenge Submission'
+  requirements:
+    _permission: 'access content'
+
 challenge_submission.submissions_log:
   path: '/admin/submissions/log'
   defaults:
