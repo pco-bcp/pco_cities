@@ -1,6 +1,8 @@
 (function ($) {
   $(document).ready(function () {
 
+    checkDOMChange();
+
     //Add accepts (this is handled by Drupal, but Drupal tears off the accept. We will add it here.)
     setTimeout(function() {$('#edit-proposal-image-upload').children('input').attr('accept', '.jpg,.png')});
     setTimeout(function() {$('#edit-proposal-upload').children('input').attr('accept', '.docx,.pdf,.doc')});
@@ -171,5 +173,13 @@
 
     return noErrors;
 
+  }
+
+  function checkDOMChange()
+  {
+    $(".proposal-file-image-upload").children('input').attr('accept', '.jpg,.png');
+    $(".proposal-file-upload").children('input').attr('accept', '.docx,.pdf,.doc');
+
+    setTimeout(checkDOMChange, 2000);
   }
 })(jQuery);

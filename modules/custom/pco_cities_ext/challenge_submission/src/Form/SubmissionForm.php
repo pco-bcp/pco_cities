@@ -126,6 +126,7 @@ class SubmissionForm extends FormBase {
       '#multiple' => TRUE,
       '#description' => $this->t('.docx and .pdf formats only'),
       '#upload_location' => 'public://proposals/',
+      '#attributes' => ['class' => ['proposal-file-upload']],
       '#required' => TRUE,
       '#upload_validators' => [
         'file_validate_size' => [25 * 1024 * 1024],
@@ -139,6 +140,7 @@ class SubmissionForm extends FormBase {
       '#size' => 20,
       '#description' => $this->t('.jpg and .png formats only'),
       '#upload_location' => 'public://proposals/images',
+      '#attributes' => ['class' => ['proposal-file-image-upload']],
       '#required' => TRUE,
       '#upload_validators' => [
         'file_validate_size' => [25 * 1024 * 1024],
