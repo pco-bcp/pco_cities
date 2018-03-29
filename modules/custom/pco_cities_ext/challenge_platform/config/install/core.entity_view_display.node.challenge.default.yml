@@ -158,17 +158,6 @@ third_party_settings:
             uuid: af406e09-f8d0-4905-b736-66c54e539657
             context_mapping:
               entity: '@panelizer.entity_context:entity'
-          4c25e93e-1ded-4cdb-ae05-ba4ae76816cc:
-            id: local_tasks_block
-            label: Tabs
-            provider: core
-            label_display: '0'
-            primary: true
-            secondary: true
-            region: top
-            weight: 1
-            uuid: 4c25e93e-1ded-4cdb-ae05-ba4ae76816cc
-            context_mapping: {  }
         id: panels_variant
         label: Default
         uuid: 1c6488c5-2320-4181-bf2c-927a40c30593
