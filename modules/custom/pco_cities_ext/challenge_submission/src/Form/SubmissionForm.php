@@ -267,6 +267,9 @@ class SubmissionForm extends FormBase {
       'link' => $form_state->getValue('link'),
       'file_links' => $template_string,
       'email_contents' => $node->get('field_challenge_email_contents')->getValue()[0]['value'] ?? '',
+      'template_link' => file_create_url(drupal_get_path('module', 'challenge_submission') . '/templates/submission-email.html'),
+      'footer_logo' => file_create_url(drupal_get_path('module', 'challenge_submission') . '/assets/wmms-blk.png'),
+      'header_logo' => file_create_url(drupal_get_path('module', 'challenge_submission') . '/assets/sig-blk-en.png')
     ];
 
     $this->saveToAuditLog($variables);

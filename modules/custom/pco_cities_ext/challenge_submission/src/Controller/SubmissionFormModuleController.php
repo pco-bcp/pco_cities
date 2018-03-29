@@ -105,7 +105,7 @@ class SubmissionFormModuleController extends ControllerBase {
     $page['#challenge_name'] = $node->title->value;
     $page['#challenge_department'] = $node->get('field_challenge_department')->getValue()[0]['value'];
     $page['#challenge_image'] = file_create_url($node->field_challenge_image->entity->uri->value);
-
+    $page['#challenge_url'] = '/node/' . $node->id();
     $page['#submission_success'] = TRUE;
     $page['#submission_email'] = $request->get('email');
 
@@ -172,7 +172,7 @@ class SubmissionFormModuleController extends ControllerBase {
 
     $form['#theme'] = 'challenge_submission_page_theme';
     $form['#attached']['library'][] = 'challenge_submission/submission-form';
-
+    $form['#challenge_url'] = '/node/' . $node->id();
     $form['#challenge_name'] = $node->title->value;
     $form['#challenge_department'] = $node->get('field_challenge_department')->getValue()[0]['value'];
     $form['#challenge_image'] = file_create_url($node->field_challenge_image->entity->uri->value);
@@ -237,7 +237,7 @@ class SubmissionFormModuleController extends ControllerBase {
     $page['#challenge_name'] = $node->title->value;
     $page['#challenge_department'] = $node->get('field_challenge_department')->getValue()[0]['value'];
     $page['#challenge_image'] = file_create_url($node->field_challenge_image->entity->uri->value);
-
+    $page['#challenge_url'] = '/node/' . $node->id();
     $page['#submission_success'] = TRUE;
     $page['#submission_email'] = $request->get('email');
 
@@ -308,7 +308,7 @@ class SubmissionFormModuleController extends ControllerBase {
     $form['#challenge_name'] = $node->title->value;
     $form['#challenge_department'] = $node->get('field_challenge_department')->getValue()[0]['value'];
     $form['#challenge_image'] = file_create_url($node->field_challenge_image->entity->uri->value);
-
+    $form['#challenge_url'] = '/node/' . $node->id();
     $form['#submission_error'] = $submission_error;
 
     return $form;

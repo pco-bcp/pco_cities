@@ -89,8 +89,8 @@
               <tr>
                 <td class="content-block" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
                   <span class="apple-link" style="text-decoration: underlined; font-size: 12px; text-align: center;">
-                    <a href="#">impact.canada.gc.ca</a> |
-                    <a href="#">view this in a web browser</a>
+                    <a href="https://impact.canada.ca/">impact.canada.gc.ca</a> |
+                    <a href="{{ template_link }}">view this in a web browser</a>
                   </span>
                 </td>
               </tr>
@@ -106,7 +106,7 @@
                   <tr>
                     <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
                       <a href="//www.canada.ca">
-                        <img style="margin-bottom: 30px; width: 300px;" width="300" height="28" alt="Logo" title="Logo" src="http://pco.test/modules/custom/pco_cities_ext/submission_form/assets/sig-blk-en.png" />
+                        <img style="margin-bottom: 30px; width: 300px;" width="300" height="28" alt="Logo" title="Logo" src="{{ header_logo }}" />
                       </a>
                       <h1 style="font-family: sans-serif; font-size: 28px; font-weight: bold; margin: 0; Margin-bottom: 15px;">Thank you for your application to the {{ challenge }}</h1>
                       <p style="font-family: sans-serif; font-size: 18px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Your application has been received by Infrastructure Canada.<br/><br/>{{ email_contents }}</p>
@@ -158,7 +158,7 @@
                           </td>
                           <td style="float: right;">
                               <a href="//www.canada.ca">
-                                <img style="margin-top: 10px; width: 175px; display: block;" width="175" height="42" alt="FooterLogo" title="FooterLogo" src="http://pco.test/modules/custom/pco_cities_ext/submission_form/assets/wmms-blk.png" />
+                                <img style="margin-top: 10px; width: 175px; display: block;" width="175" height="42" alt="FooterLogo" title="FooterLogo" src="{{ footer_logo }}" />
                               </a>
                           </td>
                         </tr>

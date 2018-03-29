@@ -7,7 +7,7 @@
         <div class="col-xs-12">
           <section data-block-plugin-id="entity_field:node:title" class="block block-ctools-block block-entity-fieldnodetitle clearfix">
             <div id="subsite-title">
-              <a href="https://challenge-dev.test/en/challenges/smart-cities">{{ form['#challenge_name'] }}</a>
+              <a href="{{ form['#challenge_url'] }}">{{ form['#challenge_name'] }}</a>
             </div>
           </section>
           <div class="department">{{ form['#challenge_department'] }}</div>
@@ -119,7 +119,7 @@
       <div class="mrgn-tp-lg">
         <h4>What happens next?</h4>
         <p class="mrgn-tp-md">Your application will be reviewed and the challenge owners will be in touch.</p>
-        <a class="mrgn-tp-lg form-link" href="#">Stay up to date on this challenge</a>
+        <a class="mrgn-tp-lg form-link" href="{{ form['#challenge_url'] }}">Stay up to date on this challenge</a>
       </div>
 
 
