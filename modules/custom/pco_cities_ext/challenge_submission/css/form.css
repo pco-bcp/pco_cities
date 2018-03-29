@@ -12,6 +12,8 @@
 
 label {
   display: none; }
+  label.option {
+    display: block !important; }
 
 .alert h4, .alert h5 {
   margin-left: 0px !important; }
