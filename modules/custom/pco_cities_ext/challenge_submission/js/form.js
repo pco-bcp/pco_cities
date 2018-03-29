@@ -21,7 +21,11 @@
       $('.alert-danger-list').hide();
       $('.error-list').html('');
 
-      validateForm(this);
+      var result = validateForm(this);
+
+      if(!result) {
+        return false;
+      }
     });
 
     //Textarea word count
@@ -112,7 +116,22 @@
 
   function validateForm() {
     var form = $("#test-form");
+    var noErrors = true;
     form.validate();
+
+    if ($('#edit-proposal-upload').val() == '') {
+      $('#edit-proposal-upload').addClass('error');
+      $('#edit-proposal-upload').closest('.form-item').addClass('group-error');
+      $('#edit-proposal-upload').closest('.form-item').append('<p class="group-error-description mrgn-tp-lg">The <strong>Proposal</strong> field is required.</p>')
+      noErrors = false;
+    }
+
+    if ($('#edit-proposal-image-upload').val() == '') {
+      $('#edit-proposal-image-upload').addClass('error');
+      $('#edit-proposal-image-upload').closest('.form-item').addClass('group-error');
+      $('#edit-proposal-image-upload').closest('.form-item').append('<p class="group-error-description mrgn-tp-lg">The <strong>Proposal Image</strong> field is required.</p>')
+      noErrors = false;
+    }
 
     //Selects all invalid fields and adds parent
     setTimeout(function () {
@@ -149,6 +168,8 @@
         });
       }
     });
+
+    return noErrors;
 
   }
 })(jQuery);

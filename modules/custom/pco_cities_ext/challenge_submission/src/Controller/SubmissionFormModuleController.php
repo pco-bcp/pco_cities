@@ -90,6 +90,15 @@ class SubmissionFormModuleController extends ControllerBase {
       }
     }
 
+    // If no matching node, then we throw an exception.
+    if (!$node) {
+      throw new NotFoundHttpException();
+    }
+
+    if(!$node->get('field_challenge_submission_email')->getValue()) {
+      throw new NotFoundHttpException();
+    }
+
     $page['#theme'] = 'challenge_submission_page_theme';
     $page['#attached']['library'][] = 'challenge_submission/submission-form';
 
@@ -138,6 +147,10 @@ class SubmissionFormModuleController extends ControllerBase {
 
     // If no matching node, then we throw an exception.
     if (!$node) {
+      throw new NotFoundHttpException();
+    }
+
+    if(!$node->get('field_challenge_submission_email')->getValue()) {
       throw new NotFoundHttpException();
     }
 
@@ -207,6 +220,10 @@ class SubmissionFormModuleController extends ControllerBase {
       throw new NotFoundHttpException();
     }
 
+    if(!$node->get('field_challenge_submission_email')->getValue()) {
+      throw new NotFoundHttpException();
+    }
+
     if (!array_key_exists($language, $node->getTranslationLanguages())) {
       $node = $node->getTranslation($defaultLang);
     }
@@ -262,6 +279,10 @@ class SubmissionFormModuleController extends ControllerBase {
 
     // If no matching node, then we throw an exception.
     if (!$node) {
+      throw new NotFoundHttpException();
+    }
+
+    if(!$node->get('field_challenge_submission_email')->getValue()) {
       throw new NotFoundHttpException();
     }
 
