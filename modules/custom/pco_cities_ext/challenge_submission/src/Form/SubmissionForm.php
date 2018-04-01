@@ -173,22 +173,23 @@ class SubmissionForm extends FormBase {
     $form['terms_agreement'] = [
       '#type' => 'checkbox',
       '#required' => TRUE,
-      '#attributes' => ['drupal-field-name' => ['Terms & Conditions']],
+      '#attributes' => ['drupal-field-name' => [t('Terms & Conditions')]],
       // Removes the wrapper.
       '#title' => 'Terms Agreement',
       '#theme_wrappers'   => [],
       '#prefix'           => '<div class="form-item form-group">',
-      '#suffix'           => '<label> I have read the <a href="/en/terms-and-conditions">Terms and Conditions</a> and the <a href="/en/privacy">Privacy Policy</a> and agree to both.</label></div>',
+      '#suffix'           => '<label> ' . t('I have read the <a href="/en/terms-and-conditions">Terms and Conditions</a> and the <a href="/en/privacy">Privacy Policy</a> and agree to both.') . '</label></div>',
     ];
 
     $form['guidelines_agreement'] = [
       '#type' => 'checkbox',
       '#required' => TRUE,
-      '#attributes' => ['drupal-field-name' => ['Guidelines']],
+      '#attributes' => ['drupal-field-name' => [t('Guidelines')]],
       // Removes the wrapper.
       '#title' => 'Guidelines Agreement',
       '#theme_wrappers'   => [],
       '#prefix'           => '<div class="form-item form-group">',
+      '#suffix'           => '<label> ' . t('I have read the Submission Guidelines') . '</label>',
     ];
 
     $form['actions']['submit'] = [

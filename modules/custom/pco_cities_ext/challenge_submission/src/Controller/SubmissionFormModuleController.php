@@ -166,10 +166,13 @@ class SubmissionFormModuleController extends ControllerBase {
     // Add hidden field to form.
     $form['friendly_url']['#value'] = $node->get('field_friendly_url')->getValue()[0]['value'];
 
-    $form['#challenge_submission_guidelines'] = $this->aliasManager->getAliasByPath('/node/'. $node->get('field_submission_guidelines_link')->getValue()[0]['target_id']);
+    $form['#challenge_submission_guidelines'] = null;
 
-    // Update the link inside the forms submission guidelines label.
-    $form['guidelines_agreement']['#suffix'] = '<label> I have read the <a href="' . $form['#challenge_submission_guidelines'] . '">Submission Guidelines.</a></label></div>';
+    if($node->get('field_submission_guidelines_link')->getValue()) {
+      $form['#challenge_submission_guidelines'] = $this->aliasManager->getAliasByPath('/node/'. $node->get('field_submission_guidelines_link')->getValue()[0]['target_id']);
+      // Update the link inside the forms submission guidelines label.
+      $form['guidelines_agreement']['#suffix'] = '<label> ' . t('I have read the <a href=@link>Submission Guidelines.</a>', ['@link' => $form['#challenge_submission_guidelines']]) . '</label></div>';
+    }
 
     // Wrap the theme with WET4 validation tag.
     $form['#prefix'] = '<div class="wb-frmvld">';
