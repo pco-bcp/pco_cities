@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_submission_guidelines_link
+    - node.type.challenge
+    - node.type.challenge_page
+id: node.challenge.field_submission_guidelines_link
+field_name: field_submission_guidelines_link
+entity_type: node
+bundle: challenge
+label: 'Submission Guidelines Link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      challenge_page: challenge_page
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
