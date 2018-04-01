@@ -166,6 +166,11 @@ class SubmissionFormModuleController extends ControllerBase {
     // Add hidden field to form.
     $form['friendly_url']['#value'] = $node->get('field_friendly_url')->getValue()[0]['value'];
 
+    $form['#challenge_submission_guidelines'] = $this->aliasManager->getAliasByPath('/node/'. $node->get('field_submission_guidelines_link')->getValue()[0]['target_id']);
+
+    // Update the link inside the forms submission guidelines label.
+    $form['guidelines_agreement']['#suffix'] = '<label> I have read the <a href="' . $form['#challenge_submission_guidelines'] . '">Submission Guidelines.</a></label></div>';
+
     // Wrap the theme with WET4 validation tag.
     $form['#prefix'] = '<div class="wb-frmvld">';
     $form['#suffix'] = '</div>';
@@ -298,9 +303,15 @@ class SubmissionFormModuleController extends ControllerBase {
     // Add hidden field to form.
     $form['friendly_url']['#value'] = $node->get('field_friendly_url')->getValue()[0]['value'];
 
+    $form['#challenge_submission_guidelines'] = $this->aliasManager->getAliasByPath('/node/'. $node->get('field_submission_guidelines_link')->getValue()[0]['target_id']);
+
+    // Update the link inside the forms submission guidelines label.
+    $form['guidelines_agreement']['#suffix'] = '<label> I have read the <a href="' . $form['#challenge_submission_guidelines'] . '">Submission Guidelines.</a></label></div>';
+
     // Wrap the theme with WET4 validation tag.
     $form['#prefix'] = '<div class="wb-frmvld">';
     $form['#suffix'] = '</div>';
+
 
     $form['#theme'] = 'challenge_submission_french_page_theme';
     $form['#attached']['library'][] = 'challenge_submission/submission-form';
@@ -310,6 +321,7 @@ class SubmissionFormModuleController extends ControllerBase {
     $form['#challenge_image'] = file_create_url($node->field_challenge_image->entity->uri->value);
     $form['#challenge_url'] = '/node/' . $node->id();
     $form['#submission_error'] = $submission_error;
+
 
     return $form;
 

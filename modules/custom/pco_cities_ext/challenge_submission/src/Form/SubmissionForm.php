@@ -189,7 +189,6 @@ class SubmissionForm extends FormBase {
       '#title' => 'Guidelines Agreement',
       '#theme_wrappers'   => [],
       '#prefix'           => '<div class="form-item form-group">',
-      '#suffix'           => '<label> I have read the <a href="#">Submission Guidelines.</a></label></div>',
     ];
 
     $form['actions']['submit'] = [
