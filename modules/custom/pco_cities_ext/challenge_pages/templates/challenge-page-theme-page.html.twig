@@ -96,6 +96,7 @@
               <div class="col-sm-12 col-md-5 bs-region bs-region--right">
                 <div class="block-region-right">
 
+                  {% if form['#challenge_details'] %}
                   {# Challenge Details #}
                   <div class="challengeDetails">
                     <div class="challengeDetails--title">
@@ -109,6 +110,7 @@
                       {% endfor %}
                     </div>
                   </div>
+                  {% endif %}
                 </div>
               </div>
             </div>
