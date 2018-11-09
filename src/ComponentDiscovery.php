@@ -6,7 +6,7 @@ use Drupal\Core\Extension\Extension;
 use Drupal\Core\Extension\ExtensionDiscovery;
 
 /**
- * Helper object to locate PCO CITIES components and sub-components.
+ * Helper object to locate pco_cities components and sub-components.
  */
 class ComponentDiscovery {
 
@@ -18,7 +18,7 @@ class ComponentDiscovery {
   protected $discovery;
 
   /**
-   * The PCO CITIES profile extension object.
+   * The pco_cities profile extension object.
    *
    * @var Extension
    */
@@ -42,20 +42,20 @@ class ComponentDiscovery {
   }
 
   /**
-   * Returns an extension object for the PCO CITIES profile.
+   * Returns an extension object for the pco_cities profile.
    *
    * @return \Drupal\Core\Extension\Extension
-   *   The PCO CITIES profile extension object.
+   *   The pco_cities profile extension object.
    *
    * @throws \RuntimeException
-   *   If the PCO CITIES profile is not found in the system.
+   *   If the pco_cities profile is not found in the system.
    */
   protected function getProfile() {
     if (empty($this->profile)) {
       $profiles = $this->discovery->scan('profile');
 
       if (empty($profiles['pco_cities'])) {
-        throw new \RuntimeException('PCO CITIES profile not found.');
+        throw new \RuntimeException('pco_cities profile not found.');
       }
       $this->profile = $profiles['pco_cities'];
     }
@@ -63,20 +63,20 @@ class ComponentDiscovery {
   }
 
   /**
-   * Returns the base path for all PCO CITIES components.
+   * Returns the base path for all pco_cities components.
    *
    * @return string
-   *   The base path for all PCO CITIES components.
+   *   The base path for all pco_cities components.
    */
   protected function getBaseComponentPath() {
     return $this->getProfile()->getPath() . '/modules/custom';
   }
 
   /**
-   * Returns extension objects for all PCO CITIES components.
+   * Returns extension objects for all pco_cities components.
    *
    * @return Extension[]
-   *   Array of extension objects for all PCO CITIES components.
+   *   Array of extension objects for all pco_cities components.
    */
   public function getAll() {
     if (is_null($this->components)) {
@@ -92,10 +92,10 @@ class ComponentDiscovery {
   }
 
   /**
-   * Returns extension objects for all main PCO CITIES components.
+   * Returns extension objects for all main pco_cities components.
    *
    * @return Extension[]
-   *   Array of extension objects for top-level PCO CITIES components.
+   *   Array of extension objects for top-level pco_cities components.
    */
   public function getMainComponents() {
     $base_path = $this->getBaseComponentPath();
@@ -108,10 +108,10 @@ class ComponentDiscovery {
   }
 
   /**
-   * Returns extension object for all PCO CITIES sub-components.
+   * Returns extension object for all pco_cities sub-components.
    *
    * @return Extension[]
-   *   Array of extension objects for PCO CITIES sub-components.
+   *   Array of extension objects for pco_cities sub-components.
    */
   public function getSubComponents() {
     $base_path = $this->getBaseComponentPath();
