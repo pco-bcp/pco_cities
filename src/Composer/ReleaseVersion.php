@@ -8,7 +8,7 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Updates the version number in PCO CITIES's component info files.
+ * Updates the version number in pco_cities's component info files.
  */
 class ReleaseVersion {
 
@@ -24,7 +24,7 @@ class ReleaseVersion {
 
     static::updateMakeFile($version);
 
-    // Find all .info files in PCO CITIES except in the installed code base.
+    // Find all .info files in pco_cities...except in the installed code base.
     $finder = (new Finder())
       ->name('*.info.yml')
       ->in('.')

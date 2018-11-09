@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
- * PCO CITIES mode subscriber for controller requests.
+ * PCOCITIES mode subscriber for controller requests.
  */
 class PCOCITIES4032404Subscriber implements EventSubscriberInterface {
 

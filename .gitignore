@@ -25,6 +25,7 @@ bower_components/
 
 # PhpStorm
 .idea
+.project
 
 # SASS
 .sass-cache

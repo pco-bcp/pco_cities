@@ -11,7 +11,8 @@
         "jcalderonzumba/gastonjs": "~1.0.2",
         "jcalderonzumba/mink-phantomjs-driver": "~0.3.1",
         "mikey179/vfsStream": "~1.2",
-        "phpunit/phpunit": "~4.8",
+        "phpunit/phpunit": "^4.8.35 || ^6.1",
+        "symfony/phpunit-bridge": "^3.4.3",
         "symfony/css-selector": "~2.8|~3.0",
         "drush/drush": "^9.0",
         "drupal/drupal-extension": "~3.4.0",
@@ -81,16 +82,16 @@
             "type"    : "package",
             "package" : {
                 "name"    : "wet-boew/wet-boew",
-                "version" : "v4.0.27",
+                "version" : "v4.0.28.1",
                 "type"    : "drupal-library",
                 "dist"    : {
-                    "url"  : "https://github.com/wet-boew/wet-boew-cdn/archive/v4.0.27.tar.gz",
+                    "url"  : "https://github.com/wet-boew/wet-boew-cdn/archive/v4.0.28.1.tar.gz",
                     "type" : "tar"
                 },
                 "source"  : {
                     "url"       : "https://github.com/wet-boew/wet-boew-cdn.git",
                     "type"      : "git",
-                    "reference" : "v4.0.27"
+                    "reference" : "v4.0.28.1"
                 }
             }
         },
@@ -98,16 +99,16 @@
             "type"    : "package",
             "package" : {
                 "name"    : "wet-boew/theme-wet-boew",
-                "version" : "v4.0.27",
+                "version" : "v4.0.28.1",
                 "type"    : "drupal-library",
                 "dist"    : {
-                    "url"  : "https://github.com/wet-boew/themes-cdn/archive/v4.0.27-theme-wet-boew.tar.gz",
+                    "url"  : "https://github.com/wet-boew/themes-cdn/archive/v4.0.28.1-theme-wet-boew.tar.gz",
                     "type" : "tar"
                 },
                 "source"  : {
                     "url"       : "https://github.com/wet-boew/themes-cdn.git",
                     "type"      : "git",
-                    "reference" : "v4.0.27-theme-wet-boew"
+                    "reference" : "v4.0.28.1-theme-wet-boew"
                 }
             }
         },
@@ -166,16 +167,16 @@
             "type"    : "package",
             "package" : {
                 "name"    : "wet-boew/theme-gcweb",
-                "version" : "v4.0.27",
+                "version" : "v4.0.28.1",
                 "type"    : "drupal-library",
                 "dist"    : {
-                    "url"  : "https://github.com/wet-boew/themes-cdn/archive/v4.0.27-gcweb.tar.gz",
+                    "url"  : "https://github.com/wet-boew/themes-cdn/archive/v4.0.28.1-gcweb.tar.gz",
                     "type" : "tar"
                 },
                 "source"  : {
                     "url"       : "https://github.com/wet-boew/themes-cdn.git",
                     "type"      : "git",
-                    "reference" : "v4.0.27-gcweb"
+                    "reference" : "v4.0.28.1-gcweb"
                 }
             }
         },
@@ -249,7 +250,7 @@
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6.0",
         "drupal-composer/drupal-scaffold": "^2.0.0",
-        "drupalwxt/wxt": "2.1.4",
+        "drupalwxt/wxt": "2.1.9",
         "harvesthq/chosen": "1.6.1",
         "drupal/mailgun": "^1.0",
         "drupal/smtp": "^1.0"
