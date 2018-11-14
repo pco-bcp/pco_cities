@@ -248,9 +248,9 @@
     },
     "require": {
         "composer/installers": "^1.2",
-        "cweagans/composer-patches": "^1.6.0",
+        "cweagans/composer-patches": "^1.6.4",
         "drupal-composer/drupal-scaffold": "^2.0.0",
-        "drupalwxt/wxt": "2.1.9",
+        "drupalwxt/wxt": "2.2.1",
         "harvesthq/chosen": "1.6.1",
         "drupal/mailgun": "^1.0",
         "drupal/smtp": "^1.0"
