@@ -17,18 +17,49 @@
             </div>
         </div>
 
-        <nav class="challenge-bar shadow-sm" id="navbar-example2">
+        {# Subpage Navigation #}
+        <nav class="challenge-bar shadow-sm" id="challenge-navbar">
             <div class="container narrow">
                 <div class="challenge-pills">
-                    <a href="./challenge.html" class="active" aria-posinset="1" aria-setsize="5">The Challenge</a>
-                    <a href="./challenge-process.html" aria-posinset="2" aria-setsize="5">Process</a>
-                    <a href="./challenge-prizes.html" aria-posinset="3" aria-setsize="5">Prizes</a>
-                    <a href="./challenge-results.html" aria-posinset="4" aria-setsize="5">Results</a>
-                    <a href="./challenge-contact.html" aria-posinset="5" aria-setsize="5">Contact</a>
+                  {% set pos = 1 %}
+                  {% for item in form['#challenge_menu_array'] %}
+                    {% if item.url == form['#challenge_menu_array'][0].url %}
+                        {% set cls = "active" %}
+                    {% else %}
+                        {% set cls = "" %}
+                    {% endif %}
+                    <a href="{{ item.url }}" class="{{ cls }}" aria-posinset="{{ pos }}" aria-setsize="5">{{ item.title }}</a>
+                    {% set pos = pos + 1 %}
+                  {% endfor %}
                 </div>
             </div>
         </nav>
 
+        {# Edit Node Bar (TODO: Admin Only) #} {% if form['#logged_in'] %}
+        <nav class="tabs mrgn-tp-md mrgn-bttm-md" role="navigation" aria-label="Tabs">
+          <h2 class="visually-hidden">Primary tabs</h2>
+          <ul class="tabs--primary nav nav-tabs">
+            <li>
+              <a href="/en/challenges/smart-cities" data-drupal-link-system-path="node/4">View
+                <span class="visually-hidden">(active tab)</span>
+              </a>
+            </li>
+            <li>
+              <a href="/en{{ form['#challenge_node'] }}/edit" rel="edit-form">Edit</a>
+            </li>
+            <li>
+              <a href="/en{{ form['#challenge_node'] }}/delete">Delete</a>
+            </li>
+            <li>
+              <a href="/en{{ form['#challenge_node'] }}/revisions">Revisions</a>
+            </li>
+            <li>
+              <a href="/en{{ form['#challenge_node'] }}/translations">Translate</a>
+            </li>
+          </ul>
+        </nav>
+        {% endif %}
+ 
         <!-- challenges section -->
         <section id="challengePage" data-spy="scroll" data-target="#navbar-example2" data-offset="0">
             <div class="container narrow">

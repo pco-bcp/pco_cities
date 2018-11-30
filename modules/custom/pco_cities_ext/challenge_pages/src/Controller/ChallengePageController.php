@@ -380,17 +380,20 @@ class ChallengePageController extends ControllerBase {
     $challenge_path = str_replace('/news', "", $challenge_path);
 
     // Add home menu item.
-    array_push($menu, [
-      'title' => $language == 'fr' ? 'Accueil' : 'Home',
-      'url' => $challenge_url,
-    ]);
+// 20181130: We do not want a 'Home' item as such
+//     array_push($menu, [
+//       'title' => $language == 'fr' ? 'Accueil' : 'Home',
+//       'url' => $challenge_url,
+//     ]);
 
     // Add subpage menu items.
     if ($node->get('field_challenge_subpage_enable_1')->getValue()[0]['value']) {
       if ($node->get('field_challenge_subpage_title_1')->getValue() && $node->get('field_challeng_subpage_url_1')->getValue()) {
         array_push($menu, [
           'title' => $node->get('field_challenge_subpage_title_1')->getValue()[0]['value'],
-          'url' => $challenge_url . '/' . $node->get('field_challeng_subpage_url_1')->getValue()[0]['value'],
+// 20181130: We want the first item to be 'The Challenge' but with the URL going to the main page.
+//        'url' => $challenge_url . '/' . $node->get('field_challeng_subpage_url_1')->getValue()[0]['value'],
+          'url' => $challenge_url,
         ]);
       }
     }
