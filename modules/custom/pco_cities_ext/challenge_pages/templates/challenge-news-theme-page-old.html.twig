@@ -1,0 +1,125 @@
+<div class="pcocp-container">
+  <div class="highlighted">
+    <div class="region region-highlighted">
+    </div>
+  </div>
+
+  <main role="main" property="mainContentOfPage" class="main-container js-quickedit-main-content">
+    <a id="main-content"></a>
+    <div class="region region-content">
+      <article data-history-node-id="4" class="node node--type-challenge node--view-mode-full clearfix contextual-region">
+        <div>
+          <div class="row bs-2col-stacked">
+            <div class="col-sm-12 bs-region bs-region--top">
+              <div class="block-region-top">
+
+                <div data-block-plugin-id="entity_field:node:field_challenge_image" class="submission-form-block block block-ctools-block block-entity-fieldnodefield-challenge-image clearfix challenge--title-block"
+                  style="background-image: url({{ form['#challenge_image'] }})">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <section data-block-plugin-id="entity_field:node:title" class="block block-ctools-block block-entity-fieldnodetitle clearfix">
+                          <div id="subsite-title">
+                            <a href="{{ form['#challenge_url'] }}">{{ form['#challenge_name'] }}</a>
+                          </div>
+                        </section>
+                        <div class="department">{{ form['#challenge_department'] }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {# Subpage Navigation #}
+                <nav role="navigation" aria-labelledby="-menu" data-block-plugin-id="system_menu_block:challenges">
+                  <h2 class="visually-hidden" id="-menu">Challenges</h2>
+                  <div class="challengeNav--container">
+                    <div class="container">
+                      <ul class="menu challenge-nav">
+                        {% for item in form['#challenge_menu_array'] %}
+
+                          {% if item.title == "News" or item.title == "Nouvelles" %}
+                            <li class="active">
+                              <a href="{{ item.url }}">{{ item.title }}</a>
+                            </li>
+                          {% else %}
+                            <li>
+                              <a href="{{ item.url }}">{{ item.title }}</a>
+                            </li>
+                          {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </nav>
+
+                {# Edit Node Bar (TODO: Admin Only) #} {% if form['#logged_in'] %}
+                <nav class="tabs mrgn-tp-md mrgn-bttm-md" role="navigation" aria-label="Tabs">
+                  <h2 class="visually-hidden">Primary tabs</h2>
+                  <ul class="tabs--primary nav nav-tabs">
+                    <li>
+                      <a href="{{ form['#challenge_root'] }}" data-drupal-link-system-path="node/4" class="is-active">View
+                        <span class="visually-hidden">(active tab)</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/en{{ form['#challenge_node'] }}/edit" rel="edit-form">Edit</a>
+                    </li>
+                    <li>
+                      <a href="/en{{ form['#challenge_node'] }}/delete">Delete</a>
+                    </li>
+                    <li>
+                      <a href="/en{{ form['#challenge_node'] }}/revisions">Revisions</a>
+                    </li>
+                    <li>
+                      <a href="/en{{ form['#challenge_node'] }}/translations">Translate</a>
+                    </li>
+                  </ul>
+                </nav>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="container">
+              <div class="col-sm-12 col-md-12 bs-region bs-region--left">
+                <div class="block-region-left">
+                  <section class="block block-ctools-block block-entity-fieldnodefield-challenge-description clearfix">
+                    <div class="col-sm-12 mrgn-bttm-lg">
+                      <h1 id="wb-cont" class="h1">{{ 'News' | t }}</h1>
+                    </div>
+                      {# If No News Exists #}
+                      {% if form['#news'] == false %}
+                        <h2 class="lead text-center">This challenge doesn't appear to have any news yet. Please check back later.</h2>
+                      {% endif %}
+
+                      {# For Loop Items Here #}
+                      {% for item in form['#news'] %}
+                        <div class="field-challenge-news-item col-sm-12 mrgn-bttm-xl brdr-bttm">
+                        <div class="col-sm-12 col-md-9 bs-region bs-region--left mrgn-bttm-xl">
+                          <h4 class="field-challenge-news-item-type">{{ item.header }}</h4>
+                          <h2 class="field-challenge-news-item-title mrgn-tp-md">{{ item.title }}</h2>
+                          <p class="news-body">
+                            {% set paragraph = item.body %}
+                            {% set body = { '#type':
+                            'processed_text', '#text': paragraph.value, '#format': paragraph.format, } %} {{ body }}
+                          </p>
+                        </div>
+                        <div class="col-sm-12 col-md-3 bs-region bs-region--right mrgn-bttm-xl">
+                            {% set side_paragraph = item.sidebar %}
+                            {% set side_body = { '#type':
+                            'processed_text', '#text': side_paragraph.value, '#format': side_paragraph.format, } %} {{ side_body }}
+                        </div>
+                      </div>
+                      {% endfor %}
+
+                      {{ form['#pager'] }}
+
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+</div>
