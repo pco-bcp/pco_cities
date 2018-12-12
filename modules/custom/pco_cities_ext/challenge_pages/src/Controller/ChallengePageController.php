@@ -238,31 +238,38 @@ class ChallengePageController extends ControllerBase {
     $page['#logged_in'] = $user->isAuthenticated();
 
     // Find out which page we're on.
-    if (($node->get('field_challeng_subpage_url_1')->getValue()[0]['value'] == $url) && ($node->get('field_challenge_subpage_enable_1')->getValue()[0]['value'])) {
+    if (($this->challengePageUrl($node, 'field_challeng_subpage_url_1') == $url) && ($node->get('field_challenge_subpage_enable_1')->getValue()[0]['value'])) {
       $page['#challenge_subpage_title'] = $node->get('field_challenge_subpage_title_1')->getValue()[0]['value'] ?? "";
       $page['#challenge_subpage_body'] = $node->get('field_challenge_subpage_body_1')->getValue()[0] ?? "";
     }
-    elseif (($node->get('field_challeng_subpage_url_2')->getValue()[0]['value'] == $url) && ($node->get('field_challenge_subpage_enable_2')->getValue()[0]['value'])) {
+    elseif (($this->challengePageUrl($node, 'field_challeng_subpage_url_2') == $url) && ($node->get('field_challenge_subpage_enable_2')->getValue()[0]['value'])) {
       $page['#challenge_subpage_title'] = $node->get('field_challenge_subpage_title_2')->getValue()[0]['value'] ?? "";
       $page['#challenge_subpage_body'] = $node->get('field_challenge_subpage_body_2')->getValue()[0] ?? "";
     }
-    elseif (($node->get('field_challeng_subpage_url_3')->getValue()[0]['value'] == $url) && ($node->get('field_challenge_subpage_enable_3')->getValue()[0]['value'])) {
+    elseif (($this->challengePageUrl($node, 'field_challeng_subpage_url_3') == $url) && ($node->get('field_challenge_subpage_enable_3')->getValue()[0]['value'])) {
       $page['#challenge_subpage_title'] = $node->get('field_challenge_subpage_title_3')->getValue()[0]['value'] ?? "";
       $page['#challenge_subpage_body'] = $node->get('field_challenge_subpage_body_3')->getValue()[0] ?? "";
     }
-    elseif (($node->get('field_challeng_subpage_url_4')->getValue()[0]['value'] == $url) && ($node->get('field_challenge_subpage_enable_4')->getValue()[0]['value'])) {
+    elseif (($this->challengePageUrl($node, 'field_challeng_subpage_url_4') == $url) && ($node->get('field_challenge_subpage_enable_4')->getValue()[0]['value'])) {
       $page['#challenge_subpage_title'] = $node->get('field_challenge_subpage_title_4')->getValue()[0]['value'] ?? "";
       $page['#challenge_subpage_body'] = $node->get('field_challenge_subpage_body_4')->getValue()[0] ?? "";
     }
-    elseif (($node->get('field_challeng_subpage_url_5')->getValue()[0]['value'] == $url) && ($node->get('field_challenge_subpage_enable_5')->getValue()[0]['value'])) {
+    elseif (($this->challengePageUrl($node, 'field_challeng_subpage_url_5') == $url) && ($node->get('field_challenge_subpage_enable_5')->getValue()[0]['value'])) {
       $page['#challenge_subpage_title'] = $node->get('field_challenge_subpage_title_5')->getValue()[0]['value'] ?? "";
       $page['#challenge_subpage_body'] = $node->get('field_challenge_subpage_body_5')->getValue()[0] ?? "";
     }
-    else {
-      throw new NotFoundHttpException();
-    }
 
     return $page;
+  }
+
+  private function challengePageUrl($node, $field) {
+    if ($fld = $node->get($field)) {
+      $val = $fld->getValue();
+      if (isset($val[0]['value'])) {
+        return $val[0]['value'];
+      }
+    }
+    return null;
   }
 
   public function challengeNewsPage($challenge) {
