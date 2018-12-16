@@ -77,51 +77,22 @@
         </section>
 
         <!-- challenge details box -->
+        {% if form['#challenge_details'] %}
         <section id="challenge-details">
             <div class="container narrow">
                 <div class="challenge-details__box">
-                    <h2><span class="blt blt-red hidden-xs"></span> Challenge details</h2>
+                    <h2><span class="blt blt-red hidden-xs"></span> {{ 'Challenge details'|t }}</h2>
                     <div class="row wb-eqht">
+                        {% for item in form['#challenge_details'] %}
                         <div class="col-sm-6">
-                            <h3>Key dates</h3>
-                            <ul class="">
-                                <li>Application deadline: April 24, 2018</li>
-                                <li>Announcement of finalists: Summer 2018</li>
-                                <li>Announcement of winners: Spring 2019</li>
-                            </ul>
+                            {{ item.value | raw }}
                         </div>
-                        <div class="col-sm-6">
-                            <h3>Prizes</h3>
-                            <ul class="">
-                                <li>One prize of up to $50 million</li>
-                                <li>Two prizes of up to $10 million each</li>
-                                <li>ne prize of up to $5 million</li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-6">
-                            <h3>Who can apply</h3>
-                            <ul class="">
-                                <li>Municipalities, local or regional governments</li>
-                                <li>Indigenous communities</li>
-                                <li>Groups of organisations above</li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-6">
-                            <h3>Resources</h3>
-                            <ul class="">
-                                <li><a href="#!">Applicante Guide</a></li>
-                                <li><a href="#!">Finalist Guide</a></li>
-                                <li><a href="#!">FAQ</a></li>
-                                <li><a href="#!">Webinars</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-12">
-                            <hr>
-                            <a type="button" class="btn btn-secondary btn-block shadow" href="#!"><i class="fas fa-check-circle"></i> Accept challenge</a>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </section>
+        {% endif %}
+
     </main>
 </div>
