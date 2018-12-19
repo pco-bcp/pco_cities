@@ -10,7 +10,7 @@
                 <span class="blt blt-lg blt-teal"></span>
                 <p>{{ form['#challenge_department'] }}</p>
                 <h1 id="wb-content">{{ form['#challenge_name'] }}</h1>
-                <a href="/"><i class="fas fa-chevron-left"></i> Back to all challenges</a>
+                <a href="/#challenges"><i class="fas fa-chevron-left"></i> Back to all challenges</a>
             </div>
             <div class="largetron__right">
                 <img src="{{ form['#challenge_image'] }}" alt="challenge banner">
@@ -88,6 +88,21 @@
                             {{ item.value | raw }}
                         </div>
                         {% endfor %}
+                        <div class="col-sm-12">
+                            <hr>
+                            <a type="button" class="btn btn-secondary btn-block shadow wb-lbx lbx-modal wb-init wb-lbx-inited" href="#centred-popup-modal" id="wb-auto-2"><i class="fas fa-check-circle"></i> {{ 'Accept challenge'|t }}</a>
+                            <section id="centred-popup-modal" class="modal-dialog modal-content overlay-def mfp-hide">
+                                <header class="modal-header">
+                                    <h2 class="modal-title" id="lbx-title">Smart Cities: Accept the Challenge</h2>
+                                </header>
+                                <div class="modal-body">
+                                    <iframe src="https://form.simplesurvey.com/f/s.aspx?s=a557b933-d6b4-4f48-88e9-8743237acabd&amp;lang=EN" width="100%" height="500px" frameborder="0"></iframe>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-default btn-sm popup-modal-dismiss" type="button">{{ 'Cancel'|t }}</button>
+                                </div>
+                            </section>
+                        </div>
                     </div>
                 </div>
             </div>

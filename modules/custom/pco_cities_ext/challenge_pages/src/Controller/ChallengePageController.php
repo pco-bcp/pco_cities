@@ -148,7 +148,7 @@ class ChallengePageController extends ControllerBase {
     $page['#challenge_description'] = $node->get('field_challenge_description')->getValue() ? $node->get('field_challenge_description')->getValue()[0] : "";
     $page['#challenge_details'] = $node->get('field_challenge_details_block')->getValue();
 
-    $page['#challenge_subpage'] = $this->challengeSubpage($challenge, 'challenge', false);
+    $page['#challenge_subpage'] = $this->challengeSubpage($challenge, $language == 'fr' ? 'le-defi' : 'challenge', false);
 
     return $page;
   }
@@ -258,6 +258,8 @@ class ChallengePageController extends ControllerBase {
       $page['#challenge_subpage_title'] = $node->get('field_challenge_subpage_title_5')->getValue()[0]['value'] ?? "";
       $page['#challenge_subpage_body'] = $node->get('field_challenge_subpage_body_5')->getValue()[0] ?? "";
     }
+
+    $page['#challenge_details'] = $node->get('field_challenge_details_block')->getValue();
 
     return $page;
   }
@@ -438,23 +440,25 @@ class ChallengePageController extends ControllerBase {
     }
 
     // Add news.. add check to include or not.
-    $node_storage = $this->entityTypeManager->getStorage('node');
-    $news_nids = $this->query->get('node')->condition('type', 'challenge_news')->execute();
-    $news_nodes = $node_storage->loadMultiple($news_nids);
-    $news_exists = FALSE;
+    if (0) { // News is disabled
+        $node_storage = $this->entityTypeManager->getStorage('node');
+        $news_nids = $this->query->get('node')->condition('type', 'challenge_news')->execute();
+        $news_nodes = $node_storage->loadMultiple($news_nids);
+        $news_exists = FALSE;
 
-    foreach ($news_nodes as $item) {
-      $target_id = $item->get('field_challenge')->getValue()[0]['target_id'];
+        foreach ($news_nodes as $item) {
+          $target_id = $item->get('field_challenge')->getValue()[0]['target_id'];
 
-      if ($target_id == $node->id()) {
-        $news_exists = TRUE;
-      }
-    }
-    if ($news_exists) {
-      array_push($menu, [
-        'title' => $language == 'fr' ? 'Nouvelles' : 'News',
-        'url' => $language == 'fr' ? $challenge_url . '/nouvelles' : $challenge_url . '/news',
-      ]);
+          if ($target_id == $node->id()) {
+            $news_exists = TRUE;
+          }
+        }
+        if ($news_exists) {
+          array_push($menu, [
+            'title' => $language == 'fr' ? 'Nouvelles' : 'News',
+            'url' => $language == 'fr' ? $challenge_url . '/nouvelles' : $challenge_url . '/news',
+          ]);
+        }
     }
 
     return $menu;
