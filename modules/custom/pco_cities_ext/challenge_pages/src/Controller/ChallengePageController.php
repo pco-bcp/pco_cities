@@ -378,8 +378,14 @@ class ChallengePageController extends ControllerBase {
     $challenge_path = str_replace('/news', "", $challenge_path);
 
     // Add home menu item.
+    if (isset($node->get('field_nav_title')->getValue()[0]['value'])) {
+      $home_label = $node->get('field_nav_title')->getValue()[0]['value'];
+    }
+    if (empty($home_label)) {
+      $home_label = $language == 'fr' ? 'Accueil' : 'Home';
+    }
     array_push($menu, [
-      'title' => $language == 'fr' ? 'Accueil' : 'Home',
+      'title' => $home_label,
       'url' => $challenge_url,
     ]);
 
