@@ -251,6 +251,8 @@ class ChallengePageController extends ControllerBase {
     }
 
     $page['#challenge_details'] = $node->get('field_challenge_details_block')->getValue();
+    $fldval = $node->get('field_challenge_details_footer')->getValue();
+    $page['#challenge_details_footer'] = isset($fldval[0]['value']) ? $fldval[0]['value'] : '';
 
     return $page;
   }
