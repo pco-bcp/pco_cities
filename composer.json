@@ -47,23 +47,6 @@
         {
             "type"    : "package",
             "package" : {
-                "name"    : "harvesthq/chosen",
-                "version" : "v1.6.1",
-                "type"    : "drupal-library",
-                "dist"    : {
-                    "url"  : "https://github.com/harvesthq/chosen-package/archive/v1.6.1.tar.gz",
-                    "type" : "tar"
-                },
-                "source"  : {
-                    "url"       : "https://github.com/harvesthq/chosen-package.git",
-                    "type"      : "git",
-                    "reference" : "v1.6.1"
-                }
-            }
-        },
-        {
-            "type"    : "package",
-            "package" : {
                 "name"    : "w8tcha/ckeditor-codemirror",
                 "version" : "v1.16",
                 "type"    : "drupal-library",
@@ -251,7 +234,6 @@
         "cweagans/composer-patches": "^1.6.4",
         "drupal-composer/drupal-scaffold": "^2.0.0",
         "drupalwxt/wxt": "2.2.1",
-        "harvesthq/chosen": "1.6.1",
         "drupal/mailgun": "^1.0",
         "drupal/smtp": "^1.0"
     },
