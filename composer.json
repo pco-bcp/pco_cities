@@ -6,26 +6,27 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require-dev": {
-        "behat/mink": "~1.7",
-        "behat/mink-goutte-driver": "~1.2",
         "jcalderonzumba/gastonjs": "~1.0.2",
         "jcalderonzumba/mink-phantomjs-driver": "~0.3.1",
         "mikey179/vfsStream": "~1.2",
+        "symfony/css-selector": "~2.8|~3.0",
+        "behat/behat": "^3.0",
+        "behat/mink": "~1.7",
+        "behat/mink-extension": "*",
+        "behat/mink-goutte-driver": "*",
+        "behat/mink-selenium2-driver": "*",
+        "composer/composer": "^1.4",
+        "drupal/console": "1.0.1",
+        "drupal/drupal-extension": "~3.4.0",
+        "squizlabs/php_codesniffer": "2.*",
+        "drupal/coder": "~8.2.0",
+        "phpmd/phpmd": "@stable",
+        "pdepend/pdepend": "2.1.0",
+        "sebastian/phpcpd": "*",
         "phpunit/phpunit": "^4.8.35 || ^6.1",
         "symfony/phpunit-bridge": "^3.4.3",
-        "symfony/css-selector": "~2.8|~3.0",
-        "drush/drush": "^9.0",
-        "drupal/drupal-extension": "~3.4.0",
-        "behat/behat": "^3.0",
-        "drupal/coder": "~8.2.0",
-        "phing/phing": "^2.14",
-        "drupal/devel": "^1.0",
-        "squizlabs/php_codesniffer": "2.*",
-        "se/selenium-server-standalone": "^2.53",
-        "drupal/console": "1.0.1",
-        "jakoch/phantomjs-installer": "1.9.8",
-        "composer/composer": "^1.4",
-        "grasmash/yaml-cli": "^1.0"
+        "deployer/deployer": "^4.0",
+        "deployer/recipes": "^4.0"
     },
     "config": {
         "bin-dir": "bin/",
@@ -45,158 +46,31 @@
             "url": "https://asset-packagist.org"
         },
         {
-            "type"    : "package",
-            "package" : {
-                "name"    : "w8tcha/ckeditor-codemirror",
-                "version" : "v1.16",
-                "type"    : "drupal-library",
-                "dist"    : {
-                    "url"  : "https://github.com/w8tcha/CKEditor-CodeMirror-Plugin/archive/1.16.tar.gz",
-                    "type" : "tar"
-                },
-                "source"  : {
-                    "url"       : "https://github.com/w8tcha/CKEditor-CodeMirror-Plugin.git",
-                    "type"      : "git",
-                    "reference" : "1.16"
-                }
-            }
-        },
-        {
-            "type"    : "package",
-            "package" : {
-                "name"    : "wet-boew/wet-boew",
-                "version" : "v4.0.28.1",
-                "type"    : "drupal-library",
-                "dist"    : {
-                    "url"  : "https://github.com/wet-boew/wet-boew-cdn/archive/v4.0.28.1.tar.gz",
-                    "type" : "tar"
-                },
-                "source"  : {
-                    "url"       : "https://github.com/wet-boew/wet-boew-cdn.git",
-                    "type"      : "git",
-                    "reference" : "v4.0.28.1"
-                }
-            }
-        },
-        {
-            "type"    : "package",
-            "package" : {
-                "name"    : "wet-boew/theme-wet-boew",
-                "version" : "v4.0.28.1",
-                "type"    : "drupal-library",
-                "dist"    : {
-                    "url"  : "https://github.com/wet-boew/themes-cdn/archive/v4.0.28.1-theme-wet-boew.tar.gz",
-                    "type" : "tar"
-                },
-                "source"  : {
-                    "url"       : "https://github.com/wet-boew/themes-cdn.git",
-                    "type"      : "git",
-                    "reference" : "v4.0.28.1-theme-wet-boew"
-                }
-            }
-        },
-        {
-            "type"    : "package",
-            "package" : {
-                "name"    : "wet-boew/theme-base",
-                "version" : "v4.0.27",
-                "type"    : "drupal-library",
-                "dist"    : {
-                    "url"  : "https://github.com/wet-boew/themes-cdn/archive/v4.0.27-theme-base.tar.gz",
-                    "type" : "tar"
-                },
-                "source"  : {
-                    "url"       : "https://github.com/wet-boew/themes-cdn.git",
-                    "type"      : "git",
-                    "reference" : "v4.0.27-theme-base"
-                }
-            }
-        },
-        {
-            "type"    : "package",
-            "package" : {
-                "name"    : "wet-boew/theme-gc-intranet",
-                "version" : "v4.0.27",
-                "type"    : "drupal-library",
-                "dist"    : {
-                    "url"  : "https://github.com/wet-boew/themes-cdn/archive/v4.0.27-theme-gc-intranet.tar.gz",
-                    "type" : "tar"
-                },
-                "source"  : {
-                    "url"       : "https://github.com/wet-boew/themes-cdn.git",
-                    "type"      : "git",
-                    "reference" : "v4.0.27-theme-gc-intranet"
-                }
-            }
-        },
-        {
-            "type"    : "package",
-            "package" : {
-                "name"    : "wet-boew/theme-gcwu-fegc",
-                "version" : "v4.0.27",
-                "type"    : "drupal-library",
-                "dist"    : {
-                    "url"  : "https://github.com/wet-boew/themes-cdn/archive/v4.0.27-theme-gcwu-fegc.tar.gz",
-                    "type" : "tar"
-                },
-                "source"  : {
-                    "url"       : "https://github.com/wet-boew/themes-cdn.git",
-                    "type"      : "git",
-                    "reference" : "v4.0.27-theme-gcwu-fegc"
-                }
-            }
-        },
-        {
-            "type"    : "package",
-            "package" : {
-                "name"    : "wet-boew/theme-gcweb",
-                "version" : "v4.0.28.1",
-                "type"    : "drupal-library",
-                "dist"    : {
-                    "url"  : "https://github.com/wet-boew/themes-cdn/archive/v4.0.28.1-gcweb.tar.gz",
-                    "type" : "tar"
-                },
-                "source"  : {
-                    "url"       : "https://github.com/wet-boew/themes-cdn.git",
-                    "type"      : "git",
-                    "reference" : "v4.0.28.1-gcweb"
-                }
-            }
-        },
-        {
-            "type"    : "package",
-            "package" : {
-                "name"    : "wet-boew/theme-ogpl",
-                "version" : "v4.0.27",
-                "type"    : "drupal-library",
-                "dist"    : {
-                    "url"  : "https://github.com/wet-boew/themes-cdn/archive/v4.0.27-theme-ogpl.tar.gz",
-                    "type" : "tar"
-                },
-                "source"  : {
-                    "url"       : "https://github.com/wet-boew/themes-cdn.git",
-                    "type"      : "git",
-                    "reference" : "v4.0.27-theme-ogpl"
-                }
-            }
+            "type" : "composer",
+            "url": "https://drupalwxt.github.io/composer-extdeps/"
         }
     ],
     "scripts": {
-        "post-install-cmd": [
-            "@composer drupal-scaffold"
-        ],
-        "post-update-cmd": [
-            "@composer package"
-        ],
-        "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
-        "package": "Drupal\\pco_cities\\Composer\\Package::execute",
-        "release-version": "Drupal\\pco_cities\\Composer\\ReleaseVersion::execute",
-        "verify-patched-constraints": "Drupal\\pco_cities\\Composer\\PatchedConstraint::execute"
+      "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
+      "pre-install-cmd": [
+          "DrupalWxT\\WxT\\ScriptHandler::checkComposerVersion"
+      ],
+      "pre-update-cmd": [
+          "DrupalWxT\\WxT\\ScriptHandler::checkComposerVersion"
+      ],
+      "post-install-cmd": [
+          "@composer drupal-scaffold",
+          "DrupalWxT\\WxT\\ScriptHandler::deployLibraries"
+      ],
+      "post-update-cmd": [
+          "@composer drupal-scaffold",
+          "DrupalWxT\\WxT\\ScriptHandler::deployLibraries"
+      ]
     },
     "extra": {
         "installer-types": [
-          "bower-asset",
-          "npm-asset"
+           "bower-asset",
+           "npm-asset"
         ],
         "installer-paths": {
             "html/core": [
@@ -227,13 +101,20 @@
             ]
         },
         "enable-patching": true,
-        "patches": { }
+        "patches": {
+            "deployer/recipes": {
+                "Enter deployer/recipes patch #80 description here":
+                "https://patch-diff.githubusercontent.com/raw/deployphp/recipes/pull/80.patch"
+            }
+        }
     },
     "require": {
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6.4",
+        "oomphinc/composer-installers-extender": "^1.1",
         "drupal-composer/drupal-scaffold": "^2.0.0",
-        "drupalwxt/wxt": "2.2.1",
+        "drush/drush": "^9.0",
+        "drupalwxt/wxt": "dev-8.x-2.x",
         "drupal/mailgun": "^1.0",
         "drupal/smtp": "^1.0"
     },
