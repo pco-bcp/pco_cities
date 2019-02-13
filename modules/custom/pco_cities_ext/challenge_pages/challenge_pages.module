@@ -20,10 +20,10 @@ function challenge_pages_theme() {
       'render element' => 'form',
       'template' => 'challenge-subpage-theme-page',
     ],
-    'challenge_news_module_page_theme' => [
-      'render element' => 'form',
-      'template' => 'challenge-news-theme-page',
-    ],
+//     'challenge_news_module_page_theme' => [
+//       'render element' => 'form',
+//       'template' => 'challenge-news-theme-page',
+//     ],
   ];
 }
 

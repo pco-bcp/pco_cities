@@ -145,6 +145,10 @@ class ChallengePageController extends ControllerBase {
     $page['#challenge_node'] = '/node/' . $node->id();
 
     // Page Content.
+    $page['#challenge_details_title'] = $node->get('field_challenge_details_title')->getValue() ? $node->get('field_challenge_details_title')->getValue()[0]['value'] : "";
+    if (empty($page['#challenge_details_title'])) {
+        $page['#challenge_details_title'] = t('Challenge details');
+    }
     $page['#challenge_description'] = $node->get('field_challenge_description')->getValue() ? $node->get('field_challenge_description')->getValue()[0] : "";
     $page['#challenge_details'] = $node->get('field_challenge_details_block')->getValue();
     $fldval = $node->get('field_challenge_details_footer')->getValue();
@@ -250,6 +254,10 @@ class ChallengePageController extends ControllerBase {
       $page['#challenge_subpage_body'] = $node->get('field_challenge_subpage_body_5')->getValue()[0] ?? "";
     }
 
+    $page['#challenge_details_title'] = $node->get('field_challenge_details_xtitle')->getValue() ? $node->get('field_challenge_details_xtitle')->getValue()[0]['value'] : "";
+    if (empty($page['#challenge_details_title'])) {
+            $page['#challenge_details_title'] = t('Challenge details');
+    }
     $page['#challenge_details'] = $node->get('field_challenge_details_block')->getValue();
     $fldval = $node->get('field_challenge_details_footer')->getValue();
     $page['#challenge_details_footer'] = isset($fldval[0]['value']) ? $fldval[0]['value'] : '';
