@@ -254,7 +254,7 @@ class ChallengePageController extends ControllerBase {
       $page['#challenge_subpage_body'] = $node->get('field_challenge_subpage_body_5')->getValue()[0] ?? "";
     }
 
-    $page['#challenge_details_title'] = $node->get('field_challenge_details_xtitle')->getValue() ? $node->get('field_challenge_details_xtitle')->getValue()[0]['value'] : "";
+    $page['#challenge_details_title'] = $node->get('field_challenge_details_title')->getValue() ? $node->get('field_challenge_details_title')->getValue()[0]['value'] : "";
     if (empty($page['#challenge_details_title'])) {
             $page['#challenge_details_title'] = t('Challenge details');
     }
