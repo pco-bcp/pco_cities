@@ -66,7 +66,7 @@
 
                 {# Challenge Description #}
                 <div class="field field--name-field-challenge-description field--type-text-with-summary field--label-hidden field--item">
-                  <h1 id="wb-cont" class="h2">{{ form['#challenge_subpage_title'] | t }}</h1>
+                  <h2 id="wb-cont" class="h2">{{ form['#challenge_subpage_title'] | t }}</h2>
                   {#{{ form['#challenge_description'] | raw }}#} {% set paragraph = form['#challenge_subpage_body'] %} {% set body = { '#type':
                   'processed_text', '#text': paragraph.value, '#format': paragraph.format, } %} {{ body }}
                 </div>
