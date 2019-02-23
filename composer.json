@@ -102,10 +102,6 @@
         },
         "enable-patching": true,
         "patches": {
-            "deployer/recipes": {
-                "Enter deployer/recipes patch #80 description here":
-                "https://patch-diff.githubusercontent.com/raw/deployphp/recipes/pull/80.patch"
-            }
         }
     },
     "require": {
