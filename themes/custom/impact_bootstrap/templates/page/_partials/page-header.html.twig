@@ -1,0 +1,32 @@
+{% if page.navigation or page.navigation_collapsible %}
+  {% block navbar %}
+
+    <header role="banner">
+      <ul id="wb-tphp">
+        <li class="wb-slc">
+          <a class="wb-sl" href="#wb-content">{{ 'Skip to main content'|t }}</a>
+        </li>
+        <li class="wb-slc visible-sm visible-md visible-lg">
+          <a class="wb-sl" href="#wb-info">{{ 'Skip to "About this site"'|t }}</a>
+        </li>
+        <li class="wb-slc">
+          <a class="wb-sl" href="#block-impact-languageswitcher">{{ 'Skip to Language Toggle'|t }}</a>
+        </li>
+      </ul>
+      <nav role="navigation" class="pre-nav">
+        <div class="container">
+          <section class="pre-nav__items">
+            <a href="https://canada.ca" target="_blank" tabindex="0"><img class="back-to-canada" src="{{ images_path  ~ 'GoC-fip-' ~ language ~ '.svg' }}" alt="Government of Canada logo"></a>
+            {{ page.language_toggle }}
+          </section>
+        </div>
+      </nav>
+    </header>
+
+    {# Navigation #}
+    {% block navigation %}
+      {{ page.navigation }}
+    {% endblock %}
+
+  {% endblock %}
+{% endif %}

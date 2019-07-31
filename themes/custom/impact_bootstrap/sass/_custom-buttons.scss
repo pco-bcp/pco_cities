@@ -1,0 +1,143 @@
+.btn {
+    font-weight: 400;
+    border: 0 solid transparent;
+    border-radius: 50px;
+    transition: all 0.25s ease-in-out;
+    padding:12px 24px;
+}
+
+//teal gradient button
+.btn-primary {
+    color: #fff!important;
+    background: $gradient-teal;
+    background-color: $blue;
+    border-color: transparent;
+    
+    &.active,
+    &:active,
+    &:hover,
+    &.open > .btn-primary.dropdown-toggle {
+        color: #fff;
+        background: none;
+        background-color: $blue;
+        border-color: transparent;
+        box-shadow:$shadow-none;
+    }
+
+    &.btn.focus,
+    &.btn:focus,
+    &btn:hover {
+        color: #fff;
+        text-decoration: none;
+        box-shadow:$shadow-none;
+    }
+}
+
+//red gradient button
+.btn-secondary {
+    color: #fff!important;
+    background: $gradient-red;
+    background-color: $red;
+    border-color: transparent;
+    
+    &.active,
+    &:active,
+    &:hover,
+    &.open > .btn-primary.dropdown-toggle {
+        color: #fff;
+        background: none;
+        background-color: $red;
+        border-color: transparent;
+        box-shadow:$shadow-none;
+    }
+
+    &.btn.focus,
+    &.btn:focus,
+    &btn:hover {
+        color: #fff;
+        text-decoration: none;
+        box-shadow:$shadow-none;
+    }
+}
+
+//navy blue button
+
+.btn-navy {
+    color: #fff!important;
+    background-color: $navy-blue;
+    border-color: transparent;
+    
+    &.active,
+    &:active,
+    &:hover,
+    &.open > .btn-primary.dropdown-toggle {
+        color: #fff;
+        background: none;
+        background-color: $navy-blue;
+        border-color: transparent;
+        box-shadow:$shadow;
+    }
+
+    &.btn.focus,
+    &.btn:focus,
+    &btn:hover {
+        color: #fff;
+        text-decoration: none;
+        box-shadow:$shadow-none;
+    }
+}
+
+
+//navy blue button
+
+.btn-blue {
+    color: #fff!important;
+    background-color: $blue;
+    border-color: transparent;
+    
+    &.active,
+    &:active,
+    &:hover,
+    &.open > .btn-primary.dropdown-toggle {
+        color: #fff;
+        background: none;
+        background-color: $blue;
+        border-color: transparent;
+        box-shadow:$shadow;
+    }
+
+    &.btn.focus,
+    &.btn:focus,
+    &btn:hover {
+        color: #fff;
+        text-decoration: none;
+        box-shadow:$shadow-none;
+    }
+}
+
+//navy red button
+
+.btn-red {
+    color: #fff!important;
+    background-color: $red;
+    border-color: transparent;
+    
+    &.active,
+    &:active,
+    &:hover,
+    &.open > .btn-primary.dropdown-toggle {
+        color: #fff;
+        background: none;
+        background-color: $red;
+        border-color: transparent;
+        box-shadow:$shadow;
+    }
+
+    &.btn.focus,
+    &.btn:focus,
+    &btn:hover {
+        color: #fff;
+        text-decoration: none;
+        box-shadow:$shadow-none;
+    }
+}
