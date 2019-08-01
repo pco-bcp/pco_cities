@@ -112,7 +112,8 @@
         "drush/drush": "^9.0",
         "drupalwxt/wxt": "dev-8.x-2.x",
         "drupal/mailgun": "^1.0",
-        "drupal/smtp": "^1.0"
+        "drupal/smtp": "^1.0",
+        "pco-bcp/impact_bootstrap": "dev-master"
     },
     "autoload": {
         "psr-4": {
