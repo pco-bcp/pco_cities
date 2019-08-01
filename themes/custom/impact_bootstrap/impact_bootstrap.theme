@@ -1,0 +1,58 @@
+<?php
+
+/**
+ * @file
+ * IMPACT Bootstrap sub-theme.
+ *
+ * Place your custom PHP code in this file.
+ */
+
+
+function impact_bootstrap_preprocess_block(&$variables) {
+  global $base_url;
+  $variables['images_path'] = $base_url . '/' . \Drupal::theme()->getActiveTheme()->getPath() . '/img/';
+}
+
+function impact_bootstrap_preprocess_page(&$variables) {
+  global $base_url;
+  $variables['images_path'] = $base_url . '/' . \Drupal::theme()->getActiveTheme()->getPath() . '/img/';
+  
+  // The Basic Page has a boolean field to indicate that the content should be rendered in a narrow column.
+  // Set a class to be used in <main> to indicate a narrow column.
+  $variables['narrow_class'] = '';     // Default full-width
+  $variables['challenge_status'] = 'status-none'; // Default no status
+  if (isset($variables['node'])) {
+    $node = $variables['node'];
+    if (is_object($node)) {
+      if ($node->hasField('field_narrow_page')) {
+        if ($fld = $node->get('field_narrow_page')) {
+          if ($fldval = $fld->getValue()) {
+            if (!empty($fldval[0]['value'])) {
+              $variables['narrow_class'] = 'narrow-page';
+            }
+          }
+        }
+      }
+      if ($node->hasField('field_challenge_status')) {
+        if ($fld = $node->get('field_challenge_status')) {
+          if ($fldval = $fld->getValue()) {
+            if (!empty($fldval[0]['value'])) {
+              $variables['challenge_status'] = 'status-'.$fldval[0]['value'];
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+function impact_bootstrap_preprocess_region(&$variables) {
+  global $base_url;
+  $variables['images_path'] = $base_url . '/' . \Drupal::theme()->getActiveTheme()->getPath() . '/img/';
+}
+
+function impact_bootstrap_form_alter(&$form, $form_state, $form_id) {
+  if ( $form['#form_id'] == 'user_login_form' ) {
+    $form['#suffix'] = '<br/><a href="/user/password/">Forgot your password?</a>';
+  }
+}
